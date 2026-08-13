@@ -39,7 +39,7 @@ Everything is in `src/data/apps.js`. Every app is a JS object with these fields:
 }
 ```
 
-## Il video tutorial
+## Add video tutorial
 
 The `video` field accepts three formats, and the correct player is selected automatically:
 
