@@ -1,4 +1,5 @@
 /* Guida Votazioni Comeback Enhypen & Evan */
+
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { min-height: 100%; }
 body { margin: 0; }
@@ -85,8 +86,10 @@ body { margin: 0; }
 .chip-on { color: var(--paper); background: var(--ink); }
 .chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
-.grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
+.grid { display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr)); }
 .mode-float { gap: 66px 18px; padding-top: 44px; }
+.card { min-width: 0; }
 
 /* --- scheda: nera a riposo, si accende del colore dell'app quando selezionata --- */
 .card {
@@ -185,6 +188,7 @@ body { margin: 0; }
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: .22em; text-transform: lowercase; color: var(--muted); }
 
+/* --- mobile --- */
 @media (max-width: 560px) {
   .card-head { flex-wrap: wrap; }
   .show-badge { order: 3; width: 100%; }
@@ -193,4 +197,18 @@ body { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   .card, .card-head, .tab, .chip, .bullet, .note, .video-empty, .float-mark { transition: none; }
   .card:hover { transform: none; }
+
+@media (max-width: 700px) {
+  .page { padding: 28px 14px 56px; }
+  .topbar { flex-wrap: wrap; gap: 10px; }
+  .hero-sub { font-size: 14px; }
+  .grid { gap: 16px; }
+  .mode-float { gap: 48px 16px; padding-top: 32px; }
+  .mode-float .card-head { padding-top: 42px; }
+  .float-mark { right: 12px; padding: 7px 11px; border-radius: 13px; }
+  .float-mark img { height: 48px; }
+  .card-head { padding: 14px 15px; }
+  .meta, .panel { padding: 15px; }
+  .tabs { padding: 0 15px; }
+}
 }

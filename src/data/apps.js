@@ -33,15 +33,14 @@ export const APPS = [
       en: "Ruby Chamsim + Time Chamsim",
     },
     expiry: {
-      it: "Ruby 90 giorni · Time fine del mese",
-      en: "Ruby 90 days · Time end of the month",
+      it: "Ruby → 90 giorni · Time → fine del mese",
+      en: "Ruby → 90 days · Time → end of the month",
     },
     collect: {
       it: [
         "Attendance giornaliera",
         "Daily Quiz e Relay Quiz",
         "Mini game",
-        "Post in community che arrivano a 30 like",
         "Pubblicità → roulette",
         "Missioni",
         "Star Chamsim, convertibili in Ruby",
@@ -50,7 +49,6 @@ export const APPS = [
         "Daily attendance",
         "Daily Quiz and Relay Quiz",
         "Mini games",
-        "Community posts that reach 30 likes",
         "Ads → roulette",
         "Missions",
         "Star Chamsim, convertible into Ruby",
@@ -67,24 +65,25 @@ export const APPS = [
     show: "core",
     accent: "#9847DA",
     logo: icon("apps/mubeat.png"),
-    video: null,
+    video: "videos/mubeat.mov",
+    videoPoster: asset("images/mubeat-poster.JPG"),
     voteType: { it: "Pre-vote + Live vote", en: "Pre-vote + live vote" },
     currency: { it: "Heart Beats", en: "Heart Beats" },
     expiry: { it: "90 giorni", en: "90 days" },
     collect: {
       it: [
-        "15 ads al giorno, 3 HB ciascuna",
+        "15 pubblicità al giorno | 3 HB ciascuna",
         "Quiz",
         "Missioni",
         "Roulette e dadi",
-        "Ads extra: click 1 HB · 1 minuto 2 HB · video intero 3 HB",
+        "Pubblicità extra: click 1 HB | 1 minuto 2 HB | video intero 3 HB",
       ],
       en: [
-        "15 ads a day, 3 HB each",
+        "15 ads a day | 3 HB each",
         "Quizzes",
         "Missions",
         "Roulette and dice",
-        "Extra ads: click 1 HB · 1 minute 2 HB · full video 3 HB",
+        "Extra ads: click 1 HB | 1 minute 2 HB | full video 3 HB",
       ],
     },
     note: null,
@@ -93,20 +92,20 @@ export const APPS = [
     id: "muniverse",
     name: "Muniverse",
     show: "core",
-    accent: "#188358",
+    accent: "#35d5b6",
     logo: icon("apps/muniverse.png"),
     video: null,
     voteType: { it: "Stage M Pick / Pre-vote", en: "Stage M Pick / pre-vote" },
     currency: { it: "Lumy", en: "Lumy" },
     expiry: {
-      it: "Free Lumy 30 giorni · Ad Lumy 60 giorni",
-      en: "Free Lumy 30 days · Ad Lumy 60 days",
+      it: "Free Lumy → 30 giorni · Ad Lumy → 60 giorni",
+      en: "Free Lumy → 30 days · Ad Lumy  → 60 days",
     },
     collect: {
       it: [
         "Attendance giornaliera",
         "Roulette",
-        "20 ads al giorno",
+        "20 pubblicità al giorno",
         "Missioni",
         "Lucky Wheel",
         "Gold Lumy a pagamento, se vuoi",
@@ -138,7 +137,7 @@ export const APPS = [
     collect: {
       it: [
         "Attendance giornaliera",
-        "50 ads al giorno",
+        "50 pubblcità al giorno",
         "Roulette, 3 volte al giorno",
         "Ladder Game, 3 volte al giorno",
         "Missioni",
@@ -166,10 +165,10 @@ export const APPS = [
     collect: {
       it: [
         "Entra nelle Open Chat disponibili",
-        "Guarda i video e gli ads fino alla fine",
+        "Guarda i video e le pubblicità  fino alla fine",
         "Fan Point Roulette",
         "Giochi",
-        "Missioni e altre task dentro l'app",
+        "Missioni dentro l'app",
       ],
       en: [
         "Join the available Open Chats",
@@ -189,14 +188,14 @@ export const APPS = [
     logo: icon("apps/coogoong.png"),
     video: null,
     voteType: { it: "Da confermare", en: "To be confirmed" },
-    currency: { it: "Blue Hearts", en: "Blue Hearts" },
+    currency: { it: "Blue Hearts 💙", en: "Blue Hearts 💙" },
     expiry: { it: "Da confermare", en: "To be confirmed" },
     collect: {
       it: [
-        "Daily check-in",
+        "Attendance giornaliera",
         "Pubblicità",
         "3 tipi di missioni giornaliere",
-        "Roulette",
+        "Roulette per vincere 💙",
         "Altre attività nello Store",
       ],
       en: [
@@ -222,16 +221,15 @@ export const APPS = [
     voteType: { it: "Pre-vote / Fans' Stage Pick", en: "Pre-vote / Fans' Stage Pick" },
     currency: { it: "Blue Hearts + Gold Hearts", en: "Blue Hearts + Gold Hearts" },
     expiry: {
-      it: "Blue da ads 30 giorni · Blue da missioni 60 giorni · Gold non scadono",
-      en: "Blue from ads 30 days · Blue from missions 60 days · Gold never expire",
+      it: "Blue da ads → 30 giorni · Blue da missioni → 60 giorni · Gold → non scadono",
+      en: "Blue from ads → 30 days · Blue from missions → 60 days · Gold → never expire",
     },
     collect: {
       it: [
-        "Check-in giornaliero",
-        "Ads",
+        "Attendance giornaliera",
+        "Pubblicità",
         "Missioni",
         "Gifting",
-        "Coupon Idolchamp",
         "Deals e acquisti per i Gold Hearts",
       ],
       en: [
@@ -239,7 +237,6 @@ export const APPS = [
         "Ads",
         "Missions",
         "Gifting",
-        "Idolchamp coupons",
         "Deals and purchases for Gold Hearts",
       ],
     },
