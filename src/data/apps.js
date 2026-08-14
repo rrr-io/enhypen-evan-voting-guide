@@ -212,40 +212,6 @@ export const APPS = [
     },
   },
   {
-    id: "fancast",
-    name: "Fancast",
-    show: "bank",
-    accent: "#0F63BC",
-    logo: icon("apps/fancast.png"),
-    video: null,
-    voteType: { it: "Pre-vote / Fans' Stage Pick", en: "Pre-vote / Fans' Stage Pick" },
-    currency: { it: "Blue Hearts + Gold Hearts", en: "Blue Hearts + Gold Hearts" },
-    expiry: {
-      it: "Blue da ads → 30 giorni · Blue da missioni → 60 giorni · Gold → non scadono",
-      en: "Blue from ads → 30 days · Blue from missions → 60 days · Gold → never expire",
-    },
-    collect: {
-      it: [
-        "Attendance giornaliera",
-        "Pubblicità",
-        "Missioni",
-        "Gifting",
-        "Deals e acquisti per i Gold Hearts",
-      ],
-      en: [
-        "Daily check-in",
-        "Ads",
-        "Missions",
-        "Gifting",
-        "Deals and purchases for Gold Hearts",
-      ],
-    },
-    note: {
-      it: "Quanti Blue e Gold servono dipende dalla strategia decisa per il comeback.",
-      en: "How many Blue and Gold you need depends on the strategy set for the comeback.",
-    },
-  },
-  {
     id: "mnetplus",
     name: "Mnet Plus",
     show: "mcountdown",
