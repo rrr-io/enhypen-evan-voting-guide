@@ -188,6 +188,15 @@ body { margin: 0; }
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: .22em; text-transform: lowercase; color: var(--muted); }
 
+.stores { display: flex; flex-direction: column; gap: 5px; margin-left: auto; }
+.store-btn { display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+  border: 1px solid rgba(255,255,255,.5); border-radius: 999px; padding: 4px 10px;
+  color: var(--paper); font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: .1em; text-transform: uppercase; white-space: nowrap;
+  transition: background .18s, color .18s, border-color .18s; }
+.store-btn:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.store-btn:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+
 /* --- mobile --- */
 @media (max-width: 560px) {
   .card-head { flex-wrap: wrap; }

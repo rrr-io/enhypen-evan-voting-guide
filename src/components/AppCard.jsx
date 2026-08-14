@@ -24,6 +24,46 @@ function LogoSlot({ src, label, size = 52, round = false }) {
   );
 }
 
+const STORE_ICONS = {
+  ios: (
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d="M16.4 1.4c0 1.1-.4 2.2-1.1 3-.9 1-2.3 1.7-3.4 1.6-.1-1.1.4-2.3 1.1-3 .8-.9 2.2-1.5 3.4-1.6zM20.7 17.1c-.6 1.3-.8 1.8-1.5 3-1 1.5-2.4 3.5-4.2 3.5-1.5 0-1.9-1-4-1s-2.6 1-4.1 1c-1.7 0-3.1-1.8-4.1-3.3C.1 16.9-.2 11.7 1.4 8.9c1.2-2 3.1-3.1 4.9-3.1 1.8 0 2.9 1 4.4 1s2.4-1 4.5-1c1.6 0 3.3.9 4.4 2.4-3.9 2.1-3.2 7.7.1 8.9z" />
+      </svg>
+  ),
+  android: (
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d="M3.6 20.5V4.3c0-.5.2-.9.5-1.2l9 8.9-9 9c-.3-.3-.5-.8-.5-1.5zM14.6 15.1l-9.2 5.3 7.1-7.1 2.1 1.8zM17.9 10.6c.6.4 1 .9 1 1.4s-.3 1-1 1.4l-2 1.2-2.4-2.6 2.4-2.4 2 1zM5.4 3.4l9.2 5.3-2.1 2.1-7.1-7.4z" />
+      </svg>
+  ),
+};
+
+function StoreLinks({ app, t }) {
+  const stores = app.stores || {};
+  const links = [
+    ["ios", "App Store", stores.ios],
+    ["android", "Google Play", stores.android],
+  ].filter(([, , url]) => url);
+  if (links.length === 0) return null;
+
+  return (
+      <div className="stores">
+        {links.map(([id, label, url]) => (
+        <a
+            key={id}
+          className="store-btn"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${t.download} ${app.name} — ${label}`}
+          >
+        {STORE_ICONS[id]}
+        {label}
+        </a>
+          ))}
+</div>
+);
+}
+
 /* Il campo video accetta tre cose:
    - il percorso di un file caricato: "videos/idolchamp.mp4"
    - un link YouTube completo
@@ -128,6 +168,7 @@ export default function AppCard({ app, active, onSelect, mode, lang, t }) {
           <h3 className="card-title">{app.name}</h3>
           <p className="card-votetype">{app.voteType[lang]}</p>
         </div>
+        <StoreLinks app={app} t={t} />
         {mode === "header" && (
           <div className={`show-badge ${show.logo ? "show-badge-mark" : ""}`}>
             {show.logo ? (

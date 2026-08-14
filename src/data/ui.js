@@ -25,6 +25,7 @@ export const UI = {
     tabVideo: "Video tutorial",
     contentsLabel: (name) => `Contenuti per ${name}`,
     collectTitle: "Come raccogliere",
+    download: "Scarica",     // blocco it
     videoEmptyTitle: "Tutorial in arrivo",
     videoEmptyBody: (name) => `Video tutorial di ${name} non ancora disponibile`,
     videoFallback: "Questo browser non riesce a riprodurre il video.",
@@ -48,6 +49,7 @@ export const UI = {
     tabVideo: "Video tutorial",
     contentsLabel: (name) => `Contents for ${name}`,
     collectTitle: "How to collect",
+    download: "Download",
     videoEmptyTitle: "Tutorial coming soon",
     videoEmptyBody: (name) => `${name} video tutorial not available yet.`,
     videoFallback: "This browser can't play the video.",
