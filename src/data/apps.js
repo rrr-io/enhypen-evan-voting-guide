@@ -7,7 +7,7 @@
    un link YouTube completo, oppure il solo ID YouTube. */
 
 const icon = (p) => `${import.meta.env.BASE_URL}icons/${p}`;
--
+
 export const asset = (p) => `${import.meta.env.BASE_URL}${p}`;
 
 export const SHOWS = {
