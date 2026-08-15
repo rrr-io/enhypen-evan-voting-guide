@@ -7,8 +7,7 @@
    un link YouTube completo, oppure il solo ID YouTube. */
 
 const icon = (p) => `${import.meta.env.BASE_URL}icons/${p}`;
-
-// Per i file caricati nella repo: asset("videos/idolchamp.mp4")
+-
 export const asset = (p) => `${import.meta.env.BASE_URL}${p}`;
 
 export const SHOWS = {
@@ -26,7 +25,8 @@ export const APPS = [
     show: "champion",
     accent: "#1A7F7F",
     logo: icon("apps/idolchamp.png"),
-    video: null,
+    video: "videos/idolchamp.mov",
+    videoPoster: asset("images/idolchamp-poster.JPG"),
     stores: { ios: "https://apps.apple.com/it/app/idolchamp/id1185735018",
       android: "https://play.google.com/store/apps/details?id=com.nwz.ichampclient&hl=it" },
     voteType: { it: "Pre-vote", en: "Pre-vote" },
@@ -96,7 +96,8 @@ export const APPS = [
     show: "core",
     accent: "#34c69a",
     logo: icon("apps/muniverse.png"),
-    video: null,
+    video: "videos/muniverse.mov",
+    videoPoster: asset("images/muniverse-poster.JPG"),
     stores: { ios: "https://apps.apple.com/tr/app/muniverse/id6749677921",
       android: "https://play.google.com/store/apps/details?id=com.tnk.muniverse&hl=it" },
     voteType: { it: "Stage M Pick / Pre-vote", en: "Stage M Pick / pre-vote" },
@@ -134,7 +135,8 @@ export const APPS = [
     show: "inkigayo",
     accent: "#1F1F1F",
     logo: icon("apps/higher.png"),
-    video: null,
+    video: "videos/higher.MP4",
+    videoPoster: asset("images/higher-poster.JPG"),
     stores: { ios: "https://apps.apple.com/us/app/higher-%ED%95%98%EC%9D%B4%EC%96%B4/id1672001935",
       android: "https://play.google.com/store/apps/details?id=com.dalcomsoft.mysu.a&hl=it" },
     voteType: { it: "Live vote / Hot Stage", en: "Live vote / Hot Stage" },
@@ -194,7 +196,8 @@ export const APPS = [
     show: "bank",
     accent: "#017FAC",
     logo: icon("apps/coogoong.png"),
-    video: null,
+    video: "videos/coogoong.mov",
+    videoPoster: asset("images/coogoong-poster.JPG"),
     stores: { ios: "https://apps.apple.com/it/app/coogoong/id1641638840",
       android: "https://play.google.com/store/apps/details?id=com.contentsmadang.fancast&hl=it" },
     voteType: { it: "Da confermare", en: "To be confirmed" },
@@ -204,9 +207,8 @@ export const APPS = [
       it: [
         "Attendance giornaliera",
         "Pubblicità",
-        "3 tipi di missioni giornaliere",
+        "Missioni giornaliere",
         "Roulette per vincere 💙",
-        "Altre attività nello Store",
       ],
       en: [
         "Daily check-in",
