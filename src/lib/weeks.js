@@ -29,6 +29,10 @@ export function mondayOf(value) {
 const isoDay = (d) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
+/* Un evento è provvisorio finché non ha confirmed: true. */
+export const isTentative = (event) => !event.confirmed;
+export const anyTentative = () => EVENTS.some(isTentative);
+
 export function statusOf(prevote, now) {
   if (!prevote) return "none";
   const start = toDate(prevote.start).getTime();

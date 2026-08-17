@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SHOWS, APPS } from "../data/apps";
 import {
-  buildWeeks, weekLabel, statusOf, toDate, startOfDay, dayIndex, LOCALE,
+  buildWeeks, weekLabel, statusOf, toDate, startOfDay, dayIndex, isTentative, LOCALE,
 } from "../lib/weeks";
 
 const BY_ID = Object.fromEntries(APPS.map((a) => [a.id, a]));
@@ -42,7 +42,9 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
 
   return (
     <article
-      className={`tl-row tl-${status} ${hit ? "tl-row-hit" : ""}`}
+      className={`tl-row tl-${status} ${hit ? "tl-row-hit" : ""} ${
+        isTentative(event) ? "tl-tent" : ""
+      }`}
       style={{ "--accent": accent }}
       onMouseEnter={notify}
       onMouseLeave={() => onHit(null)}
@@ -65,6 +67,7 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
           </span>
         )}
         {status === "open" && <span className="tl-live-now">{t.statusOpen}</span>}
+        {isTentative(event) && <span className="tl-tent-tag">{t.toConfirm}</span>}
       </div>
 
       <div className="tl-track">

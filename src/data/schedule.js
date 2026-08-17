@@ -1,4 +1,4 @@
-/* Calendario delle votazioni — dal calendario ufficiale EN-CODE
+/* Calendario delle votazioni
    "MUSIC SHOW VOTING SCHEDULES" (comeback the sin:bliss).
 
    Gli orari si scrivono in KST (fuso +09:00) perché è così che li pubblicano i
@@ -7,10 +7,14 @@
    Formato: "2026-08-21T20:00:00+09:00".
 
    Un evento = un voto e la puntata a cui serve:
-     episode   data e ora della diretta (KST)
-     prevote   finestra di voto anticipato, oppure null se non c'è
-     liveVote  true se si vota durante la diretta
-     apps      id delle app usate (vedi apps.js)
+     episode    data e ora della diretta (KST)
+     prevote    finestra di voto anticipato, oppure null se non c'è
+     liveVote   true se si vota durante la diretta
+     apps       id delle app usate (vedi apps.js)
+     confirmed  true quando la finestra è confermata dai canali ufficiali.
+                Senza questo campo l'evento è marcato "da confermare", e in cima
+                al calendario compare l'avviso: quando tutti gli eventi hanno
+                confirmed: true, l'avviso sparisce da solo.
 
    Le settimane non si scrivono a mano: la pagina raggruppa gli eventi da lunedì
    a domenica e, se una finestra scavalca la domenica, la barra continua nella
@@ -18,6 +22,13 @@
 
    Nota del calendario ufficiale: gli orari possono cambiare a discrezione dei
    programmi. */
+
+/* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
+   in cima e dice al lettore quanto è fresca l'informazione. */
+export const STATUS = {
+  updated: "2026-08-17",
+  source: { label: "EN-CAL", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
+};
 
 /* Titolo mostrato in cima al calendario. Lascia title vuoto per non mostrarlo. */
 export const ALBUM = {
@@ -37,6 +48,7 @@ export const EVENTS = [
     episode: "2026-08-21T18:00:00+09:00",
     prevote: null,
     liveVote: false,
+    confirmed: true,
   },
   {
     id: "core-22",
@@ -45,6 +57,15 @@ export const EVENTS = [
     episode: "2026-08-22T15:45:00+09:00",
     prevote: null,
     liveVote: false,
+  },
+  {
+    id: "inki-23",
+    show: "inkigayo",
+    apps: [],
+    episode: "2026-08-23T15:15:00+09:00",
+    prevote: false,
+    liveVote: false,
+    confirmed: true,
   },
   {
     id: "champ-26",
@@ -82,7 +103,7 @@ export const EVENTS = [
     id: "inki-30",
     show: "inkigayo",
     apps: ["linc", "higher"],
-    episode: "2026-08-30T15:25:00+09:00",
+    episode: "2026-08-30T15:15:00+09:00",
     prevote: { start: "2026-08-24T12:00:00+09:00", end: "2026-08-28T23:59:00+09:00" },
     liveVote: true,
     note: {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ALBUM } from "../data/schedule";
+import { ALBUM, STATUS } from "../data/schedule";
+import { anyTentative } from "../lib/weeks";
 import CalendarTimeline from "./CalendarTimeline";
 import CalendarMini from "./CalendarMini";
 import CalendarDays from "./CalendarDays";
@@ -16,6 +17,10 @@ export default function CalendarView({ lang, t }) {
   }, []);
 
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const tentative = anyTentative();
+  const updated = new Intl.DateTimeFormat(LOCALE[lang], { day: "numeric", month: "long" }).format(
+    new Date(`${STATUS.updated}T00:00:00`)
+  );
 
   return (
     <div className="cal">
@@ -26,8 +31,32 @@ export default function CalendarView({ lang, t }) {
         </header>
       )}
 
+      {tentative && (
+        <p className="cal-flag">
+          <span className="cal-flag-pill">{t.tentative}</span>
+          {t.tentativeText}
+        </p>
+      )}
+
       <div className="cal-top">
-        <p className="cal-warning">{t.calWarning}</p>
+        <p className="cal-warning">
+          {t.calWarning}
+          <span className="cal-updated">
+            {t.updatedOn} {updated}
+            {STATUS.source?.label && (
+              <>
+                {" · "}
+                {STATUS.source.url ? (
+                  <a href={STATUS.source.url} target="_blank" rel="noopener noreferrer">
+                    {STATUS.source.label}
+                  </a>
+                ) : (
+                  STATUS.source.label
+                )}
+              </>
+            )}
+          </span>
+        </p>
         <div className="cal-style">
           {[
             ["timeline", t.styleTimeline],

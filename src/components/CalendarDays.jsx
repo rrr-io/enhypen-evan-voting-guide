@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SHOWS, APPS } from "../data/apps";
-import { buildDays, statusOf, toDate, startOfDay, LOCALE } from "../lib/weeks";
+import { buildDays, statusOf, toDate, startOfDay, isTentative, LOCALE } from "../lib/weeks";
 
 const BY_ID = Object.fromEntries(APPS.map((a) => [a.id, a]));
 const hm = { hour: "2-digit", minute: "2-digit" };
@@ -23,7 +23,10 @@ function VoteLine({ item, lang, t, now }) {
     : t.allDay;
 
   return (
-    <li className={`dv-item ${closes ? "dv-urgent" : ""}`} style={{ "--accent": accent }}>
+    <li
+      className={`dv-item ${closes ? "dv-urgent" : ""} ${isTentative(event) ? "dv-tent" : ""}`}
+      style={{ "--accent": accent }}
+    >
       <span className="dv-apps">
         {apps.map((a) => (
           <img key={a.id} src={a.logo || undefined} alt={a.name} title={a.name} />
@@ -33,6 +36,7 @@ function VoteLine({ item, lang, t, now }) {
         <b>{apps.map((a) => a.name).join(" + ")}</b>
         <span className="dv-meta">
           {show.name} · {t.prevote} · {when}
+          {isTentative(event) && <i className="dv-tent-tag">{t.toConfirm}</i>}
         </span>
       </span>
       {status === "open" && <span className="dv-tag">{t.statusOpen}</span>}
@@ -80,6 +84,7 @@ function Day({ day, lang, t, now, open, onToggle, isToday }) {
                       <b>{show.name}</b>
                       <span className="dv-meta">
                         {t.episode} {fmt(e.episode, lang, hm)}
+                        {isTentative(e) && <i className="dv-tent-tag">{t.toConfirm}</i>}
                       </span>
                     </span>
                     {e.liveVote && <span className="dv-tag dv-tag-live">{t.pinLive}</span>}
