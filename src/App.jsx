@@ -3,10 +3,12 @@ import { SHOWS, APPS } from "./data/apps";
 import { UI, LANGS, CREDIT } from "./data/ui";
 import AppCard from "./components/AppCard";
 import PreSave from "./components/PreSave";
+import CalendarView from "./components/CalendarView";
 import "./styles.css";
 
 export default function App() {
   const [lang, setLang] = useState("it");
+  const [view, setView] = useState("guide");
   const [filter, setFilter] = useState("tutti");
   const [active, setActive] = useState(null);
   // Variante del logo music show: "float" (a cavallo del bordo) o "header" (dentro la fascia).
@@ -65,6 +67,26 @@ export default function App() {
           <div className="hero-rule" />
         </header>
 
+        <nav className="views" aria-label={t.viewLabel}>
+          {[
+            ["guide", t.viewGuide],
+            ["calendar", t.viewCalendar],
+          ].map(([id, label]) => (
+            <button
+              key={id}
+              className={`view-tab ${view === id ? "view-on" : ""}`}
+              aria-pressed={view === id}
+              onClick={() => setView(id)}
+            >
+              {label}
+            </button>
+          ))}
+        </nav>
+
+        {view === "calendar" ? (
+          <CalendarView lang={lang} t={t} />
+        ) : (
+          <>
         <nav className="filters" aria-label={t.filterLabel}>
           <button
             className={`chip ${filter === "tutti" ? "chip-on" : ""}`}
@@ -96,6 +118,8 @@ export default function App() {
             />
           ))}
         </main>
+          </>
+        )}
 
         <footer className="foot">
           {t.footer}
