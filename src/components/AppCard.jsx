@@ -147,6 +147,7 @@ export default function AppCard({ app, active, onSelect, mode, lang, t }) {
 
   return (
     <article
+      id={app.id}
       className={`card ${active ? "card-on" : ""}`}
       style={{ "--accent": app.accent }}
       onMouseDown={onSelect}
@@ -165,7 +166,11 @@ export default function AppCard({ app, active, onSelect, mode, lang, t }) {
       <header className="card-head">
         <LogoSlot src={app.logo} label={app.name} size={52} />
         <div className="card-head-text">
-          <h3 className="card-title">{app.name}</h3>
+          <h3 className="card-title">
+            <a href={`#${app.id}`} title={`${t.linkToApp} ${app.name}`}>
+              {app.name}
+            </a>
+          </h3>
           <p className="card-votetype">{app.voteType[lang]}</p>
         </div>
         <StoreLinks app={app} t={t} />

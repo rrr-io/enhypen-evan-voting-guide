@@ -6,11 +6,26 @@ import PreSave from "./components/PreSave";
 import CalendarView from "./components/CalendarView";
 import "./styles.css";
 
+const HASH = { guide: "#guida", calendar: "#calendario" };
+const APP_IDS = new Set(APPS.map((a) => a.id));
+
+/* L'indirizzo può contenere #calendario, #guida oppure l'id di una app,
+   per esempio #idolchamp: in quel caso apre la guida su quella scheda. */
+function readHash() {
+  if (typeof window === "undefined") return { view: "guide", app: null };
+  const raw = decodeURIComponent(window.location.hash.replace("#", ""));
+  if (raw === "calendario") return { view: "calendar", app: null };
+  if (APP_IDS.has(raw)) return { view: "guide", app: raw };
+  return { view: "guide", app: null };
+}
+
 export default function App() {
   const [lang, setLang] = useState("it");
-  const [view, setView] = useState("guide");
+  // la vista è legata all'indirizzo: #calendario apre il calendario, anche da
+  // un link esterno, e il tasto indietro del telefono torna alla guida
+  const [view, setView] = useState(() => readHash().view);
   const [filter, setFilter] = useState("tutti");
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState(() => readHash().app);
   // Variante del logo music show: "float" (a cavallo del bordo) o "header" (dentro la fascia).
   const mode = "float";
   const t = UI[lang];
@@ -19,6 +34,32 @@ export default function App() {
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
+
+  useEffect(() => {
+    const sync = () => {
+      const { view: v, app } = readHash();
+      setView(v);
+      if (app) {
+        setActive(app);
+        setFilter("tutti"); // se un filtro nascondeva quella scheda
+      }
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    window.addEventListener("popstate", sync);
+    return () => {
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener("popstate", sync);
+    };
+  }, []);
+
+  const goTo = (next) => {
+    setView(next);
+    if (window.location.hash !== HASH[next]) {
+      window.history.pushState(null, "", HASH[next]);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="page">
@@ -76,7 +117,7 @@ export default function App() {
               key={id}
               className={`view-tab ${view === id ? "view-on" : ""}`}
               aria-pressed={view === id}
-              onClick={() => setView(id)}
+              onClick={() => goTo(id)}
             >
               {label}
             </button>
@@ -87,6 +128,12 @@ export default function App() {
           <CalendarView lang={lang} t={t} />
         ) : (
           <>
+        <p className="jump-row">
+          <a className="jump" href={HASH.calendar}>
+            {t.jumpToCalendar}
+          </a>
+        </p>
+
         <nav className="filters" aria-label={t.filterLabel}>
           <button
             className={`chip ${filter === "tutti" ? "chip-on" : ""}`}
