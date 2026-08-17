@@ -43,18 +43,6 @@ export default function CalendarView({ lang, t }) {
           {t.calWarning}
           <span className="cal-updated">
             {t.updatedOn} {updated}
-            {STATUS.source?.label && (
-              <>
-                {" · "}
-                {STATUS.source.url ? (
-                  <a href={STATUS.source.url} target="_blank" rel="noopener noreferrer">
-                    {STATUS.source.label}
-                  </a>
-                ) : (
-                  STATUS.source.label
-                )}
-              </>
-            )}
           </span>
         </p>
         <div className="cal-style">
