@@ -4,9 +4,10 @@ import { UI, LANGS, CREDIT } from "./data/ui";
 import AppCard from "./components/AppCard";
 import PreSave from "./components/PreSave";
 import CalendarView from "./components/CalendarView";
+import Scoring from "./components/Scoring";
 import "./styles.css";
 
-const HASH = { guide: "#guida", calendar: "#calendario" };
+const HASH = { guide: "#guida", calendar: "#calendario", scoring: "#punteggi" };
 const APP_IDS = new Set(APPS.map((a) => a.id));
 
 /* L'indirizzo può contenere #calendario, #guida oppure l'id di una app,
@@ -15,6 +16,7 @@ function readHash() {
   if (typeof window === "undefined") return { view: "guide", app: null };
   const raw = decodeURIComponent(window.location.hash.replace("#", ""));
   if (raw === "calendario") return { view: "calendar", app: null };
+  if (raw === "punteggi") return { view: "scoring", app: null };
   if (APP_IDS.has(raw)) return { view: "guide", app: raw };
   return { view: "guide", app: null };
 }
@@ -112,6 +114,7 @@ export default function App() {
           {[
             ["guide", t.viewGuide],
             ["calendar", t.viewCalendar],
+            ["scoring", t.viewScoring],
           ].map(([id, label]) => (
             <button
               key={id}
@@ -126,6 +129,8 @@ export default function App() {
 
         {view === "calendar" ? (
           <CalendarView lang={lang} t={t} />
+        ) : view === "scoring" ? (
+          <Scoring lang={lang} t={t} />
         ) : (
           <>
         <p className="jump-row">

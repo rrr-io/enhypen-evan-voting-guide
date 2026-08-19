@@ -514,3 +514,159 @@ body { margin: 0; }
 .card-title a:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px;
   border-radius: 4px; }
 .card-title a:focus-visible::after { opacity: .8; }
+
+/* ===================== PUNTEGGI ===================== */
+.pz-intro { font-size: 14px; line-height: 1.6; max-width: 62ch; margin: 0 0 20px; }
+.pz-toggle { display: inline-flex; align-items: center; gap: 10px; background: none;
+  border: 1px solid var(--ink); border-radius: 999px; padding: 9px 16px; cursor: pointer;
+  color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.pz-toggle:hover { background: #F0F0F0; }
+.pz-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.pz-toggle .dv-chev { margin: -3px 0 0; }
+.pz-toggle[aria-expanded="true"] .dv-chev { transform: rotate(-135deg); margin-top: 3px; }
+.pz-gloss { list-style: none; margin: 16px 0 0; max-width: 68ch;
+  border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px;
+  background: #FAFAFA; display: grid; gap: 14px; }
+.pz-gloss li { display: flex; gap: 11px; align-items: flex-start;
+  opacity: 0; animation: pz-in .42s cubic-bezier(.22,.9,.28,1) forwards;
+  animation-delay: calc(var(--i) * 70ms); }
+.pz-gkey { width: 14px; height: 14px; border-radius: 4px; background: var(--c);
+  margin-top: 2px; flex-shrink: 0; }
+.pz-gloss b { font-size: 13.5px; display: flex; align-items: center; gap: 7px; }
+
+/* la stellina arriva dopo che tutti i criteri sono comparsi */
+.pz-star { font-size: 13px; line-height: 1; color: var(--c); flex-shrink: 0;
+  transform-origin: center; opacity: 0;
+  animation: pz-star-pop .5s cubic-bezier(.2,1.5,.4,1) forwards,
+    pz-twinkle 3.4s ease-in-out infinite;
+  animation-delay: calc(700ms + var(--i) * 90ms), calc(1200ms + var(--i) * 90ms); }
+@keyframes pz-star-pop {
+  from { opacity: 0; transform: scale(.2) rotate(-70deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pz-twinkle {
+  0%, 100% { opacity: 1; transform: none; }
+  50% { opacity: .55; transform: scale(.86); }
+}
+.pz-starnote { display: flex; align-items: center; gap: 7px; margin: 12px 0 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
+  opacity: 0; animation: pz-in .5s ease forwards; animation-delay: 1.1s; }
+.pz-gwhat { font-size: 12.5px; line-height: 1.5; color: var(--muted); display: block;
+  margin-top: 2px; }
+
+/* tab con le icone dei programmi */
+.pz-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin: 26px 0 0;
+  padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.pz-tab { flex: 1 1 84px; height: 48px; display: grid; place-items: center; cursor: pointer;
+  background: #fff; border: 1px solid var(--line); border-radius: 11px; padding: 5px 8px;
+  transition: border-color .18s, box-shadow .18s, transform .18s; }
+.pz-tab img { max-height: 24px; max-width: 100%; width: auto; display: block;
+  filter: grayscale(1) contrast(1.05); opacity: .55; transition: filter .18s, opacity .18s; }
+.pz-tab span { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: .06em;
+  text-transform: uppercase; text-align: center; color: var(--muted); }
+.pz-tab.is-on { border-color: var(--ink); box-shadow: 3px 3px 0 var(--ink); transform: translateY(-1px); }
+.pz-tab.is-on img { filter: none; opacity: 1; }
+.pz-tab.is-on span { color: var(--ink); }
+.pz-tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* torta in scala di grigi */
+/* su schermo largo le etichette stanno attorno alla torta: il palco è più
+   grande del grafico per fargli spazio */
+.pz-stage { position: relative; width: 340px; max-width: 100%; margin: 26px auto 0; }
+.pz-chart { position: relative; width: 100%; aspect-ratio: 1; }
+.pz { position: absolute; inset: 16%; width: 68%; height: 68%;
+  transform: rotate(-90deg); display: block; }
+.pz-tags { position: absolute; inset: 0; pointer-events: none; }
+.pz-track { fill: none; stroke: #F2F2F2; stroke-width: 22; }
+/* le fette sono ferme: cambia solo quanto ne è scoperto dalla maschera */
+.pz-slice { fill: none; stroke-width: 22; cursor: default;
+  transition: opacity .2s ease, filter .2s ease; }
+.pz-slice.is-live { cursor: pointer; }
+.pz-rest { fill: none; stroke-width: 22; opacity: 1; transition: opacity .28s ease; }
+.pz-rest.is-off { opacity: 0; }
+/* la lancetta: un tratto bianco che si allunga e scopre il colore sotto */
+.pz-sweep { fill: none; stroke: #fff; stroke-width: 30;
+  transition: stroke-dasharray linear; }
+.pz-slice.is-live { cursor: pointer; }
+.pz-slice.is-live:hover { filter: brightness(1.07); }
+.pz-slice.is-dim { opacity: .25; }
+.pz-slice.is-sel { filter: saturate(1.15) brightness(1.03); }
+.pz-center { position: absolute; inset: 0; display: grid; place-content: center; gap: 3px;
+  text-align: center; pointer-events: none; padding: 0 30%; }
+
+/* etichette corte accanto alle fette */
+.pz-tag { position: absolute; transform: translate(-50%, -50%); white-space: nowrap;
+  display: flex; align-items: baseline; gap: 5px; pointer-events: none;
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink);
+  background: rgba(255,255,255,.88); border-radius: 999px; padding: 3px 7px;
+  box-shadow: inset 0 0 0 1px var(--c);
+  opacity: 0; animation: pz-tag-in .4s ease forwards; }
+.pz-tag b { font-size: 10px; }
+.pz-tag.side-l { transform: translate(-6%, -50%); }
+.pz-tag.side-r { transform: translate(-94%, -50%); }
+.pz-tag.is-dim { opacity: .25 !important; }
+@keyframes pz-tag-in {
+  from { opacity: 0; transform-origin: center; filter: blur(2px); }
+  to { opacity: 1; filter: none; }
+}
+.pz-show { font-family: 'Anton', 'Arial Narrow', sans-serif; font-size: 15px; line-height: 1.1;
+  text-transform: uppercase; }
+.pz-hint { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); line-height: 1.5; }
+.pz-lab { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); }
+.pz-num { font-family: 'Anton', 'Arial Narrow', sans-serif; font-size: 30px; line-height: 1; }
+
+/* legenda sotto la torta */
+.pz-legend { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 4px; }
+.pz-legend > li { border-bottom: 1px solid var(--line); transition: opacity .2s;
+  opacity: 0; animation: pz-in .42s cubic-bezier(.22,.9,.28,1) forwards;
+  animation-delay: calc(1150ms + var(--i) * 60ms); }
+.pz-legend > li:last-child { border-bottom: 0; }
+.pz-legend > li.is-dim { opacity: .45; }
+.pz-row { width: 100%; display: flex; align-items: center; gap: 11px; background: none;
+  border: 0; padding: 11px 6px; margin: 0 -6px; border-radius: 8px; cursor: pointer;
+  color: var(--ink); text-align: left; transition: background .18s; }
+.pz-row:hover { background: #F4F4F4; }
+.pz-row.is-sel { background: #EDEDED; }
+.pz-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.pz-key { width: 13px; height: 13px; border-radius: 4px; flex-shrink: 0; }
+.pz-text { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.pz-text b { font-size: 14.5px; }
+.pz-src { font-size: 12px; line-height: 1.45; color: var(--muted); }
+.pz-pct { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; }
+.pz-apps { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; padding-left: 30px; }
+.pz-app { display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+  color: var(--ink); border: 1px solid var(--line); border-radius: 999px;
+  padding: 4px 11px 4px 4px; font-size: 12px; font-weight: 600; }
+.pz-app:hover { border-color: var(--ink); }
+.pz-app img { width: 18px; height: 18px; border-radius: 5px; display: block; }
+.pz-foot { margin: 28px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+
+@media (max-width: 700px) {
+  .pz-tab { flex: 1 1 62px; height: 44px; }
+  /* sul telefono non c'è spazio ai lati: la torta si allarga e le etichette
+     vanno in fila sotto, dove non possono essere tagliate */
+  .pz-stage { width: 100%; max-width: 300px; }
+  .pz { inset: 5%; width: 90%; height: 90%; }
+  .pz-tags { position: static; display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 5px; margin-top: 16px; }
+  .pz-tag { position: static; transform: none; font-size: 8px; padding: 3px 8px; }
+  .pz-tag.side-l, .pz-tag.side-r, .pz-tag.side-c { transform: none; }
+  .pz-center { padding: 0 22%; }
+  .pz-text b { font-size: 14px; }
+}
+@keyframes pz-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pz-slice { transition: none; }
+  .pz-tag { animation: none; opacity: 1; }
+  .pz-gloss li, .pz-legend > li, .pz-starnote { animation: none; opacity: 1; }
+  .pz-star { animation: none; opacity: 1; }
+}
