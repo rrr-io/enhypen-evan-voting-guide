@@ -37,9 +37,23 @@ function VoteLine({ item, lang, t, now }) {
         <span className="dv-meta">
           {show.name} · {t.prevote} · {when}
           {isTentative(event) && <i className="dv-tent-tag">{t.toConfirm}</i>}
+          {event.stage === "unconfirmed" && (
+            <i className="dv-tent-tag is-stage">{t.stageUnconfirmed}</i>
+          )}
+          {event.stage === "none" && <i className="dv-tent-tag is-stage">{t.stageNone}</i>}
         </span>
       </span>
-      {status === "open" && <span className="dv-tag">{t.statusOpen}</span>}
+      {event.voteUrl && status === "open" && (
+        <a
+          className="dv-tag dv-tag-go"
+          href={event.voteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t.goVote}
+        </a>
+      )}
+      {status === "open" && !event.voteUrl && <span className="dv-tag">{t.statusOpen}</span>}
     </li>
   );
 }
@@ -85,6 +99,12 @@ function Day({ day, lang, t, now, open, onToggle, isToday }) {
                       <span className="dv-meta">
                         {t.episode} {fmt(e.episode, lang, hm)}
                         {isTentative(e) && <i className="dv-tent-tag">{t.toConfirm}</i>}
+                        {e.stage === "unconfirmed" && (
+                          <i className="dv-tent-tag is-stage">{t.stageUnconfirmed}</i>
+                        )}
+                        {e.stage === "none" && (
+                          <i className="dv-tent-tag is-stage">{t.stageNone}</i>
+                        )}
                       </span>
                     </span>
                     {e.liveVote && <span className="dv-tag dv-tag-live">{t.pinLive}</span>}

@@ -44,7 +44,7 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
     <article
       className={`tl-row tl-${status} ${hit ? "tl-row-hit" : ""} ${
         isTentative(event) ? "tl-tent" : ""
-      }`}
+      } ${event.stage === "none" ? "tl-nostage" : ""}`}
       style={{ "--accent": accent }}
       onMouseEnter={notify}
       onMouseLeave={() => onHit(null)}
@@ -68,6 +68,12 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
         )}
         {status === "open" && <span className="tl-live-now">{t.statusOpen}</span>}
         {isTentative(event) && <span className="tl-tent-tag">{t.toConfirm}</span>}
+        {event.stage === "unconfirmed" && (
+          <span className="tl-stage-tag">{t.stageUnconfirmed}</span>
+        )}
+        {event.stage === "none" && (
+          <span className="tl-stage-tag is-none">{t.stageNone}</span>
+        )}
       </div>
 
       <div className="tl-track">
@@ -118,6 +124,14 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
           <span className="tl-muted">{t.broadcastOnly}</span>
         )}
       </p>
+
+      {event.voteUrl && (
+        <p className="tl-vote">
+          <a href={event.voteUrl} target="_blank" rel="noopener noreferrer">
+            {t.goVote}
+          </a>
+        </p>
+      )}
 
       {event.note && epIdx !== null && <p className="ev-note">{event.note[lang]}</p>}
     </article>

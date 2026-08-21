@@ -55,8 +55,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Voti illimitati: tutto quello che accumuli lo puoi usare.",
-      en: "Unlimited votes: everything you collect can be spent.",
+      it: "Nel pre-vote di Show Champion il voto è illimitato: tutto quello che accumuli lo puoi usare.",
+      en: "In the Show Champion pre-vote there's no cap: everything you collect can be spent.",
     },
   },
   {
@@ -88,7 +88,10 @@ export const APPS = [
         "Extra ads: click 1 HB | 1 minute 2 HB | full video 3 HB",
       ],
     },
-    note: null,
+    note: {
+      it: "Per il voto live su Music Core servono 5 voti per account: si ottengono convertendo 150 Heart Beats, oppure comprandoli.",
+      en: "The live vote on Music Core takes 5 votes per account: convert 150 Heart Beats, or buy them.",
+    },
   },
   {
     id: "muniverse",
@@ -125,8 +128,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Sugli Stage M Pick aspetta le indicazioni del voting team prima di spendere.",
-      en: "For Stage M Pick, wait for the voting team's instructions before spending.",
+      it: "Sugli Stage M Pick aspetta le indicazioni del voting team prima di spendere. Per il voto live su Music Core servono 250 Ad Lumy o 300 Gold Lumy per account.",
+      en: "For Stage M Pick, wait for the voting team's instructions before spending. The live vote on Music Core takes 250 Ad Lumy or 300 Gold Lumy per account.",
     },
   },
   {
@@ -158,7 +161,10 @@ export const APPS = [
         "Missions",
       ],
     },
-    note: null,
+    note: {
+      it: "Il voto live su Inkigayo costa 250 rubini oppure 25 diamanti, per 5 voti a account.",
+      en: "The live vote on Inkigayo costs 250 rubies or 25 diamonds, for 5 votes per account.",
+    },
   },
   {
     id: "linc",
@@ -188,7 +194,10 @@ export const APPS = [
         "Missions and other in-app tasks",
       ],
     },
-    note: null,
+    note: {
+      it: "Nel pre-vote di Inkigayo si può votare 10 volte al giorno per account, e si possono usare più account.",
+      en: "In the Inkigayo pre-vote you can vote 10 times a day per account, and multiple accounts are allowed.",
+    },
   },
   {
     id: "coogoong",
@@ -219,8 +228,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "App nuova su Music Bank: le regole possono cambiare, ricontrolla prima del comeback.",
-      en: "New app on Music Bank: rules may change, check again before the comeback.",
+      it: "Nel pre-vote di Music Bank il voto è illimitato: usa tutto quello che hai. App nuova, le regole possono cambiare: ricontrolla prima di votare.",
+      en: "In the Music Bank pre-vote there's no cap: spend everything you have. It's a new app and rules may change, so check again before voting.",
     },
   },
   {
@@ -248,8 +257,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Qui non serve accumulare niente: conta solo avere gli account pronti.",
-      en: "Nothing to collect here: what matters is having the accounts ready.",
+      it: "Qui non serve accumulare niente: conta solo avere gli account pronti. Il pre-vote resta aperto fino al martedì della settimana di messa in onda, e ogni device conta come un account in più.",
+      en: "Nothing to collect here: what matters is having the accounts ready. The pre-vote stays open until the Tuesday of the broadcast week, and each device counts as another account.",
     },
   },
 ];

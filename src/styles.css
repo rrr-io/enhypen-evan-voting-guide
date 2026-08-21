@@ -536,7 +536,7 @@ body { margin: 0; }
 .pz-gloss b { font-size: 13.5px; display: flex; align-items: center; gap: 7px; }
 
 /* la stellina arriva dopo che tutti i criteri sono comparsi */
-.pz-star { font-size: 13px; line-height: 1; color: var(--c); flex-shrink: 0;
+.pz-star { flex-shrink: 0; color: var(--c); font-size: 13px; line-height: 1;
   transform-origin: center; opacity: 0;
   animation: pz-star-pop .5s cubic-bezier(.2,1.5,.4,1) forwards,
     pz-twinkle 3.4s ease-in-out infinite;
@@ -581,6 +581,8 @@ body { margin: 0; }
 .pz-tags { position: absolute; inset: 0; pointer-events: none; }
 .pz-track { fill: none; stroke: #F2F2F2; stroke-width: 22; }
 /* le fette sono ferme: cambia solo quanto ne è scoperto dalla maschera */
+/* lo spessore resta uguale per tutte: se cambia, i tagli fra una fetta e
+   l'altra non combaciano più e si vedono gli scalini */
 .pz-slice { fill: none; stroke-width: 22; cursor: default;
   transition: opacity .2s ease, filter .2s ease; }
 .pz-slice.is-live { cursor: pointer; }
@@ -644,6 +646,8 @@ body { margin: 0; }
   padding: 4px 11px 4px 4px; font-size: 12px; font-weight: 600; }
 .pz-app:hover { border-color: var(--ink); }
 .pz-app img { width: 18px; height: 18px; border-radius: 5px; display: block; }
+.pz-note { margin: 20px 0 0; padding: 11px 14px; font-size: 12.5px; line-height: 1.5;
+  background: #F3F3F3; border-left: 2px solid var(--ink); }
 .pz-foot { margin: 28px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
 
 @media (max-width: 700px) {
@@ -670,3 +674,24 @@ body { margin: 0; }
   .pz-gloss li, .pz-legend > li, .pz-starnote { animation: none; opacity: 1; }
   .pz-star { animation: none; opacity: 1; }
 }
+
+/* ---- partecipazione al palco ---- */
+.tl-stage-tag { font-family: 'JetBrains Mono', monospace; font-size: 8.5px;
+  letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  border: 1px solid var(--ink); border-radius: 999px; padding: 2px 8px; }
+.tl-stage-tag.is-none { border-style: dashed; color: var(--muted); border-color: var(--muted); }
+.tl-nostage .tl-bubble { background: repeating-linear-gradient(45deg, #fff 0 4px, #F0F0F0 4px 8px);
+  color: var(--muted); border-color: var(--muted); }
+.tl-nostage .tl-bubble::before { border-bottom-color: var(--muted); }
+.dv-tent-tag.is-stage { border-style: solid; border-color: var(--ink); color: var(--ink); }
+
+/* ---- pulsante verso la votazione ---- */
+.tl-vote { margin: 10px 0 0; }
+.tl-vote a { display: inline-flex; align-items: center; text-decoration: none;
+  background: var(--accent); color: #fff; border: 1px solid var(--accent);
+  border-radius: 999px; padding: 7px 14px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; transition: filter .18s; }
+.tl-vote a:hover { filter: brightness(1.1); }
+.tl-vote a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.dv-tag-go { text-decoration: none; }

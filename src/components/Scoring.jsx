@@ -111,7 +111,9 @@ export default function Scoring({ lang, t }) {
                   <b>
                     {c.label[lang]}
                     {c.star && (
-                        <span className="pz-star" aria-hidden="true">ᯓ★</span>
+                      <span className="pz-star" aria-hidden="true">
+                        ᯓ★
+                      </span>
                     )}
                   </b>
                   <span className="pz-gwhat">{c.what[lang]}</span>
@@ -278,6 +280,8 @@ export default function Scoring({ lang, t }) {
           })}
         </ul>
       )}
+
+      {entry?.note && <p className="pz-note">{entry.note[lang]}</p>}
 
       <p className="pz-foot">{t.scoringFoot}</p>
     </div>
