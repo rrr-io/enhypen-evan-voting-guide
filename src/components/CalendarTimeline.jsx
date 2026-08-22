@@ -115,7 +115,7 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
       <p className="tl-detail">
         {event.prevote ? (
           <>
-            {t.prevote}{" "}
+            {event.voteLabel ? event.voteLabel[lang] : t.prevote}{" "}
             {fmt(event.prevote.start, lang, { weekday: "short", day: "numeric", ...hm })}
             {" → "}
             {fmt(event.prevote.end, lang, { weekday: "short", day: "numeric", ...hm })}

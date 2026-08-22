@@ -55,8 +55,7 @@ export const CRITERIA = {
   livevote: {
     star: true,
     label: { it: "Voto live", en: "Live vote" },
-    color: "#fe7d06" +
-        "",
+    color: "#fe7d06",
     what: {
       it: "Voto durante la diretta, dall'app o via SMS secondo il programma.",
       en: "Voting during the broadcast, from the app or by text depending on the show.",

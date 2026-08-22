@@ -14,6 +14,8 @@
      stage      "unconfirmed" se non si sa ancora se ci sarà il palco,
                 "none" se quella settimana il gruppo non è in programma.
                 Senza questo campo la partecipazione si dà per prevista.
+     voteLabel  etichetta della finestra al posto di "Pre-vote", per le
+                votazioni che non fanno classifica: { it: "...", en: "..." }
      voteUrl    link diretto alla votazione di quella puntata, se esiste:
                 diventa un pulsante accanto alla finestra. Se il link è sempre
                 lo stesso conviene invece metterlo sulla scheda della app.
@@ -32,7 +34,7 @@
 /* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
    in cima e dice al lettore quanto è fresca l'informazione. */
 export const STATUS = {
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   source: { label: "EN-CODE", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
 };
 
@@ -154,5 +156,25 @@ export const EVENTS = [
     episode: "2026-09-05T15:15:00+09:00",
     prevote: { start: "2026-09-01T18:00:00+09:00", end: "2026-09-03T11:00:00+09:00" },
     liveVote: true,
+  },
+
+  /* Votazione fuori classifica, per esempio lo Stage M Pick di Muniverse:
+     stessa struttura, con l'etichetta cambiata e la puntata in cui andrebbe in
+     onda il palco. Togli le barre di commento e metti le date vere.*/
+
+  {
+    id: "mpick-05",
+    show: "core",
+    apps: ["muniverse"],
+    episode: "2026-09-05T15:15:00+09:00",
+    prevote: { start: "2026-08-22T17:00:00+09:00", end: "2026-08-27T12:00:00+09:00" },
+    liveVote: false,
+    voteLabel: { it: "Stage M Pick", en: "Stage M Pick" },
+    voteUrl: "https://www.muniverse.io/votes",
+    confirmed: true,
+    note: {
+      it: "Non fa classifica: decide chi porta il palco speciale. ",
+      en: "It doesn't count towards the chart: it picks who performs the special stage.",
+    },
   },
 ];

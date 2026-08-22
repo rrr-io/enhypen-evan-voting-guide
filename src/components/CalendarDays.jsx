@@ -35,7 +35,7 @@ function VoteLine({ item, lang, t, now }) {
       <span className="dv-text">
         <b>{apps.map((a) => a.name).join(" + ")}</b>
         <span className="dv-meta">
-          {show.name} · {t.prevote} · {when}
+          {show.name} · {event.voteLabel ? event.voteLabel[lang] : t.prevote} · {when}
           {isTentative(event) && <i className="dv-tent-tag">{t.toConfirm}</i>}
           {event.stage === "unconfirmed" && (
             <i className="dv-tent-tag is-stage">{t.stageUnconfirmed}</i>
