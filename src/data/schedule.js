@@ -34,7 +34,7 @@
 /* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
    in cima e dice al lettore quanto è fresca l'informazione. */
 export const STATUS = {
-  updated: "2026-08-22",
+  updated: "2026-08-23",
   source: { label: "EN-CODE", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
 };
 
@@ -102,6 +102,8 @@ export const EVENTS = [
     apps: ["coogoong"],
     episode: "2026-08-28T17:15:00+09:00",
     prevote: { start: "2026-08-23T15:00:00+09:00", end: "2026-08-26T11:00:00+09:00" },
+    voteUrl: "https://open.coogoong.com/?target=event%2Fdetail%3Fkey_event%3D803",
+    confirmed: true,
     liveVote: false,
   },
   {
@@ -175,6 +177,21 @@ export const EVENTS = [
     note: {
       it: "Non fa classifica: decide chi porta il palco speciale. ",
       en: "It doesn't count towards the chart: it picks who performs the special stage.",
+    },
+  },
+  {
+    id: "hotstage-30",
+    show: "inkigayo",
+    apps: ["higher"],
+    episode: "2026-08-30T15:20:00+09:00",
+    prevote: { start: "2026-08-23T15:20:00+09:00", end: "2026-08-27T12:00:00+09:00" },
+    liveVote: false,
+    voteLabel: { it: "Hot Stage", en: "Hot Stage" },
+    confirmed: true,
+    voteUrl: "https://higher.fan/app/hotstage/6",
+    note: {
+      it: "Non fa classifica: decide chi porta il palco extra. La votazione apre durante la diretta del 23 e chiude giovedì 27 alle 12:00 KST.",
+      en: "It doesn't count towards the chart: it picks who gets the extra stage. Voting opens during the 23rd broadcast and closes on Thursday the 27th at 12:00 KST.",
     },
   },
 ];
