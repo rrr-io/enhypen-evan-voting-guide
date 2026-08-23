@@ -133,8 +133,8 @@ export const SCORING = [
   {
     show: "mcountdown",
     note: {
-      it: "I criteri di M Countdown sommano 110%: il voto durante la diretta si aggiunge sopra il resto del punteggio. Il dato è confermato da due fonti diverse.",
-      en: "M Countdown's criteria add up to 110%: the live vote is added on top of the rest of the score. Two separate sources give the same figures.",
+      it: "I criteri di M Countdown sommano 110%: il voto durante la diretta si aggiunge sopra il resto del punteggio.",
+      en: "M Countdown's criteria add up to 110%: the live vote is added on top of the rest of the score.",
     },
     slices: [
       { key: "digitals", pct: 50, detail: { it: "Circle Global K-Pop Chart", en: "Circle Global K-Pop Chart" } },
