@@ -15,7 +15,10 @@ export const UI = {
       "Ogni scheda dice quale valuta serve, come raccoglierla e quando scade. Tocca una scheda per tenerla in evidenza." +
         "\nLa fanbase di ENHYPEN ITALIA e EVAN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ",
     langLabel: "Lingua",
-    presaveTitle: "Presave ora",
+    releasesTitle: "Uscite",
+    presaveNow: "Presave",
+    listenNow: "Ascolta ora",
+    allPlatforms: "Tutte le piattaforme →",
     viewGuide: "Guida",
     viewCalendar: "Calendario",
     viewScoring: "Punteggi",
@@ -84,7 +87,10 @@ export const UI = {
       "Each card tells you which currency you need, how to collect it and when it expires. Tap a Voting App card to keep it highlighted. "+
         "\nThe ENHYPEN italia and EVAN italia fanbase wish you fun and fighting for the comeback! (๑˃ᴗ˂)ﻭ",
     langLabel: "Language",
-    presaveTitle: "Presave now",
+    releasesTitle: "Releases",
+    presaveNow: "Presave",
+    listenNow: "Listen now",
+    allPlatforms: "All platforms →",
     viewGuide: "Guide",
     viewCalendar: "Calendar",
     viewScoring: "Scoring",
