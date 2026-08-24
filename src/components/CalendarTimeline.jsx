@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SHOWS, APPS } from "../data/apps";
+import { track } from "../lib/track";
 import {
   buildWeeks, weekLabel, statusOf, toDate, startOfDay, dayIndex, isTentative, LOCALE,
 } from "../lib/weeks";
@@ -127,7 +128,12 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
 
       {event.voteUrl && (
         <p className="tl-vote">
-          <a href={event.voteUrl} target="_blank" rel="noopener noreferrer">
+          <a
+            href={event.voteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track(`voto/${event.id}`, `Voto ${event.show}`)}
+          >
             {t.goVote}
           </a>
         </p>

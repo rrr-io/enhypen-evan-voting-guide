@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SHOWS } from "../data/apps";
+import { track } from "../lib/track";
 
 function LogoSlot({ src, label, size = 52, round = false }) {
   const radius = round ? "50%" : size >= 40 ? 12 : 8;
@@ -55,6 +56,7 @@ function StoreLinks({ app, t }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${t.download} ${app.name} — ${label}`}
+          onClick={() => track(`store/${app.id}/${id}`, `Store ${app.name} ${label}`)}
           >
         {STORE_ICONS[id]}
         {label}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SHOWS, APPS } from "../data/apps";
+import { track } from "../lib/track";
 import { buildDays, statusOf, toDate, startOfDay, isTentative, LOCALE } from "../lib/weeks";
 
 const BY_ID = Object.fromEntries(APPS.map((a) => [a.id, a]));
@@ -49,6 +50,7 @@ function VoteLine({ item, lang, t, now }) {
           href={event.voteUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track(`voto/${event.id}`, `Voto ${event.show}`)}
         >
           {t.goVote}
         </a>

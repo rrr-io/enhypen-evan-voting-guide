@@ -1,4 +1,5 @@
 import { ALBUMS } from "../data/release";
+import { track } from "../lib/track";
 
 export default function PreSave({ t }) {
   if (ALBUMS.length === 0) return null;
@@ -29,6 +30,7 @@ export default function PreSave({ t }) {
                   href={album.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track(`uscita/${album.id}/piattaforme`, `${album.title} — piattaforme`)}
                 >
                   {t.allPlatforms}
                 </a>
@@ -42,7 +44,13 @@ export default function PreSave({ t }) {
             key={album.id}
             className={`rel-row ${album.url ? "" : "is-off"} rel-${album.action}`}
             {...(album.url
-              ? { href: album.url, target: "_blank", rel: "noopener noreferrer" }
+              ? {
+                  href: album.url,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  onClick: () =>
+                    track(`uscita/${album.id}/${album.action}`, `${album.title} — ${album.action}`),
+                }
               : {})}
           >
             <span className="rel-cover">

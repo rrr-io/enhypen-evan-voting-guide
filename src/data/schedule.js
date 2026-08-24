@@ -117,13 +117,15 @@ export const EVENTS = [
   {
     id: "inki-30",
     show: "inkigayo",
-    apps: ["linc", "higher"],
+    apps: ["linc"],
     episode: "2026-08-30T15:20:00+09:00",
     prevote: { start: "2026-08-24T12:00:00+09:00", end: "2026-08-28T23:59:00+09:00" },
+    voteUrl: "https://app.linc.fan/31TL/QQZGPb9Z",
     liveVote: true,
+    confirmed: true,
     note: {
-      it: "Pre-vote su LINC, voto live su Higher: servono 250 rubini.",
-      en: "Pre-vote on LINC, live vote on Higher: 250 rubies needed.",
+      it: "30 Fan Point o 8 💎 per voto. Max 10 voti per account.",
+      en: "30 Fan Points o 8 💎 per vote. Max 10 votes per account",
     },
   },
   {
