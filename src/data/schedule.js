@@ -113,7 +113,7 @@ export const EVENTS = [
     episode: "2026-08-29T15:15:00+09:00",
     prevote: { start: "2026-08-25T18:00:00+09:00", end: "2026-08-27T11:00:00+09:00" },
     liveVote: true,
-    voteUrl: { mubeat: "https://mubeat.applink.info/xZAvfWULyE", muniverse: "https://muniverse.io/votes" },
+    voteUrl: { mubeat: "https://mubeat.applink.info/xZAvfWULyE", muniverse: "https://www.muniverse.io/votes" },
     confirmed: true,
   },
   {
