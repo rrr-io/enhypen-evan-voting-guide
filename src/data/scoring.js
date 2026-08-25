@@ -48,8 +48,8 @@ export const CRITERIA = {
     label: { it: "Pre-vote", en: "Pre-vote" },
     color: "#D0367F",
     what: {
-      it: "Voto nelle app nei giorni prima della puntata: è quello di cui parla questa guida.",
-      en: "App voting in the days before the episode: this is what this guide covers.",
+      it: "Voto nelle app nei giorni prima della puntata.",
+      en: "App voting in the days before the episode.",
     },
   },
   livevote: {
