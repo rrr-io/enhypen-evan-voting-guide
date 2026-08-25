@@ -87,7 +87,7 @@ export const SCORING = [
     slices: [
       { key: "digitals", pct: 35, detail: { it: "Bugs, MelOn, Genie, FLO", en: "Bugs, MelOn, Genie, FLO" } },
       { key: "physical", pct: 15, detail: { it: "Hanteo Chart", en: "Hanteo Chart" } },
-      { key: "broadcast", pct: 20, detail: { it: "MBC M: TV, Show Champion, Weekly Idol", en: "MBC M: TV, Show Champion, Weekly Idol" } },
+      { key: "broadcast", pct: 20, detail: { it: "Partecipazione a MBC M Show Champion", en: "Attendance at MBC M Show Champion" } },
       { key: "sns", pct: 10, detail: { it: "Visualizzazioni MV", en: "MV views" } },
       { key: "prevote", pct: 20, apps: ["idolchamp"] },
     ],
