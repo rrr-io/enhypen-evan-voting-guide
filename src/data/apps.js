@@ -89,8 +89,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Per il voto live su Music Core servono 5 voti per account: si ottengono convertendo 150 Heart Beats, oppure comprandoli.",
-      en: "The live vote on Music Core takes 5 votes per account: convert 150 Heart Beats, or buy them.",
+      it: "Nel pre-vote di Music Core 1 voto = 1 Heart Beat. Per il voto live servono invece 5 voti per account, che si ottengono convertendo 150 Heart Beats oppure comprandoli.",
+      en: "In the Music Core pre-vote 1 vote = 1 Heart Beat. The live vote instead takes 5 votes per account: convert 150 Heart Beats, or buy them.",
     },
   },
   {
@@ -128,8 +128,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Sugli Stage M Pick aspetta le indicazioni del voting team prima di spendere. Per il voto live su Music Core servono 250 Ad Lumy o 300 Gold Lumy per account.",
-      en: "For Stage M Pick, wait for the voting team's instructions before spending. The live vote on Music Core takes 250 Ad Lumy or 300 Gold Lumy per account.",
+      it: "Nel pre-vote di Music Core un voto costa 5 Ad Lumy. Lo Stage M Pick costa 100 Lumy free a voto, massimo 10 voti al giorno. Per il voto live servono 250 Ad Lumy o 300 Gold Lumy per account.",
+      en: "In the Music Core pre-vote one vote costs 5 Ad Lumy. Stage M Pick costs 100 free Lumy per vote, up to 10 votes a day. The live vote takes 250 Ad Lumy or 300 Gold Lumy per account.",
     },
   },
   {
@@ -162,8 +162,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Il voto live su Inkigayo costa 250 rubini oppure 25 diamanti, per 5 voti a account.",
-      en: "The live vote on Inkigayo costs 250 rubies or 25 diamonds, for 5 votes per account.",
+      it: "L'Hot Stage costa 30 rubini o 3 💎 a voto. Il voto live su Inkigayo costa invece 250 rubini oppure 25 💎, per 5 voti a account.",
+      en: "Hot Stage costs 30 rubies or 3 💎 per vote. The live vote on Inkigayo costs 250 rubies or 25 💎, for 5 votes per account.",
     },
   },
   {
@@ -195,8 +195,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Nel pre-vote di Inkigayo si può votare 10 volte al giorno per account, e si possono usare più account.",
-      en: "In the Inkigayo pre-vote you can vote 10 times a day per account, and multiple accounts are allowed.",
+      it: "Nel pre-vote di Inkigayo un voto costa 30 Fan Point o 8 💎, massimo 10 voti per account: in tutto 300 Fan Point. Si possono usare più account.",
+      en: "In the Inkigayo pre-vote one vote costs 30 Fan Points or 8 💎, up to 10 votes per account: 300 Fan Points in total. Multiple accounts are allowed.",
     },
   },
   {
@@ -228,8 +228,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Nel pre-vote di Music Bank il voto è illimitato: usa tutto quello che hai. App nuova, le regole possono cambiare: ricontrolla prima di votare.",
-      en: "In the Music Bank pre-vote there's no cap: spend everything you have. It's a new app and rules may change, so check again before voting.",
+      it: "Nel pre-vote di Music Bank un voto costa 50 hearts, fino a 500 voti per sessione con 10 minuti di attesa fra una e l'altra.",
+      en: "In the Music Bank pre-vote one vote costs 50 hearts, up to 500 votes per session with a 10-minute wait in between. ",
     },
   },
   {
@@ -257,8 +257,8 @@ export const APPS = [
       ],
     },
     note: {
-      it: "Qui non serve accumulare niente: conta solo avere gli account pronti. Il pre-vote resta aperto fino al martedì della settimana di messa in onda, e ogni device conta come un account in più.",
-      en: "Nothing to collect here: what matters is having the accounts ready. The pre-vote stays open until the Tuesday of the broadcast week, and each device counts as another account.",
+      it: "Qui non serve accumulare niente: conta solo avere gli account pronti. Ogni device conta come un account in più.",
+      en: "Nothing to collect here: what matters is having the accounts ready. Eeach device counts as another account.",
     },
   },
 ];
