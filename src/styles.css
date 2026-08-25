@@ -489,9 +489,13 @@ body { margin: 0; }
 .dv-tag-live { background: var(--ink); }
 .dv-empty { color: var(--muted); font-size: 13px; }
 
+/* i pulsanti stanno sulla stessa riga di icona e testo, ancorati a destra
+   (dv-text con flex:1 li spinge lì). Con due app si impilano in colonna,
+   restando sul lato destro invece di andare sotto il testo. */
+.dv-votes { display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  flex-shrink: 0; }
+
 @media (max-width: 700px) {
-  .dv-item { flex-wrap: wrap; }
-  .dv-tag { order: 3; }
   .dv-date { font-size: 17px; }
   .dv-sum { margin-left: 0; flex-basis: 100%; }
 }
@@ -710,7 +714,12 @@ body { margin: 0; }
 .dv-tent-tag.is-stage { border-style: solid; border-color: var(--ink); color: var(--ink); }
 
 /* ---- pulsante verso la votazione ---- */
-.tl-vote { margin: 10px 0 0; }
+.tl-vote { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 7px; }
+
+@media (max-width: 700px) {
+  /* pillole compatte, una sotto l'altra invece che affiancate */
+  .tl-vote { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
 .tl-vote a { display: inline-flex; align-items: center; text-decoration: none;
   background: var(--accent); color: #fff; border: 1px solid var(--accent);
   border-radius: 999px; padding: 7px 14px;

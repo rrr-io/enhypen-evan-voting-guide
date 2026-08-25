@@ -9,7 +9,7 @@ const LOCALE = { it: "it-IT", en: "en-GB" };
 
 export default function CalendarView({ lang, t }) {
   const [now, setNow] = useState(() => Date.now());
-  const [style, setStyle] = useState("timeline"); // "timeline" | "days"
+  const [style, setStyle] = useState("days"); // "timeline" | "days"
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 60000);

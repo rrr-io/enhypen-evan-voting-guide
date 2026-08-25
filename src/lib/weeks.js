@@ -162,3 +162,12 @@ export function buildGrid() {
 
   return { days, rows };
 }
+
+/* voteUrl può essere una stringa o un oggetto { idApp: link }.
+   Restituisce sempre un elenco [idApp | null, link], saltando i vuoti. */
+export function voteLinks(event) {
+  const v = event.voteUrl;
+  if (!v) return [];
+  if (typeof v === "string") return [[null, v]];
+  return Object.entries(v).filter(([, url]) => url);
+}

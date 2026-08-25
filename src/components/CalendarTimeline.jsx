@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SHOWS, APPS } from "../data/apps";
 import { track } from "../lib/track";
 import {
-  buildWeeks, weekLabel, statusOf, toDate, startOfDay, dayIndex, isTentative, LOCALE,
+  buildWeeks, weekLabel, statusOf, toDate, startOfDay, dayIndex, isTentative, voteLinks, LOCALE,
 } from "../lib/weeks";
 
 const BY_ID = Object.fromEntries(APPS.map((a) => [a.id, a]));
@@ -126,16 +126,20 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
         )}
       </p>
 
-      {event.voteUrl && (
+      {voteLinks(event).length > 0 && (
         <p className="tl-vote">
-          <a
-            href={event.voteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track(`voto/${event.id}`, `Voto ${event.show}`)}
-          >
-            {t.goVote}
-          </a>
+          {voteLinks(event).map(([appId, url]) => (
+            <a
+              key={appId || "solo"}
+              style={appId && BY_ID[appId] ? { "--accent": BY_ID[appId].accent } : undefined}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track(`voto/${event.id}${appId ? "/" + appId : ""}`, `Voto ${event.show}`)}
+            >
+              {t.goVote}
+            </a>
+          ))}
         </p>
       )}
 

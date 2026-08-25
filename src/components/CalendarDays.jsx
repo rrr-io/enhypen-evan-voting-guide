@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SHOWS, APPS } from "../data/apps";
 import { track } from "../lib/track";
-import { buildDays, statusOf, toDate, startOfDay, isTentative, LOCALE } from "../lib/weeks";
+import { buildDays, statusOf, toDate, startOfDay, isTentative, voteLinks, LOCALE } from "../lib/weeks";
 
 const BY_ID = Object.fromEntries(APPS.map((a) => [a.id, a]));
 const hm = { hour: "2-digit", minute: "2-digit" };
@@ -44,18 +44,26 @@ function VoteLine({ item, lang, t, now }) {
           {event.stage === "none" && <i className="dv-tent-tag is-stage">{t.stageNone}</i>}
         </span>
       </span>
-      {event.voteUrl && status === "open" && (
-        <a
-          className="dv-tag dv-tag-go"
-          href={event.voteUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => track(`voto/${event.id}`, `Voto ${event.show}`)}
-        >
-          {t.goVote}
-        </a>
+      {status === "open" && voteLinks(event).length > 0 && (
+        <span className="dv-votes">
+          {voteLinks(event).map(([appId, url]) => (
+            <a
+              key={appId || "solo"}
+              className="dv-tag dv-tag-go"
+              style={appId && BY_ID[appId] ? { "--accent": BY_ID[appId].accent } : undefined}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track(`voto/${event.id}${appId ? "/" + appId : ""}`, `Voto ${event.show}`)}
+            >
+              {t.goVote}
+            </a>
+          ))}
+        </span>
       )}
-      {status === "open" && !event.voteUrl && <span className="dv-tag">{t.statusOpen}</span>}
+      {status === "open" && voteLinks(event).length === 0 && (
+        <span className="dv-tag">{t.statusOpen}</span>
+      )}
     </li>
   );
 }
