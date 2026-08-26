@@ -137,10 +137,10 @@ export const SCORING = [
       en: "M Countdown's criteria add up to 110%: the live vote is added on top of the rest of the score.",
     },
     slices: [
-      { key: "digitals", pct: 50, detail: { it: "Circle Global K-Pop Chart", en: "Circle Global K-Pop Chart" } },
+      { key: "digitals", pct: 50, detail: { it: "Circle Global K-Pop Chart. Dati ottenuti da Spotify, Apple Music, Youtube Music, MelOn, Genie, Flo, Vibe, Bugs, TME Chart.", en: "Circle Global K-Pop Chart. Data compiled from Spotify, Apple Music, Youtube Music, MelOn, Genie, Flo, Vibe, Bugs, TME Chart." } },
       { key: "physical", pct: 15, detail: { it: "Circle Album Chart", en: "Circle Album Chart" } },
-      { key: "broadcast", pct: 10, detail: { it: "Mnet: TV", en: "Mnet: TV" } },
-      { key: "sns", pct: 15, detail: { it: "Video musicale e TikTok", en: "Music video and TikTok" } },
+      { key: "broadcast", pct: 10, detail: { it: "Partecipazione a MCD e numero di volte che la canzone/MV è riprodotta negli show di Mnet TV", en: "Attending MCD and number of times the song/MV is played on Mnet TV shows." } },
+      { key: "sns", pct: 15, detail: { it: "Visualizzazioni MV e TikTok", en: "Music video views and TikTok" } },
       { key: "prevote", pct: 10, apps: ["mnetplus"] },
       { key: "livevote", pct: 10, apps: ["mnetplus"] },
     ],

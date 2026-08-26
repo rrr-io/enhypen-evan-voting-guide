@@ -4,6 +4,7 @@ import { UI, LANGS, CREDIT } from "./data/ui";
 import AppCard from "./components/AppCard";
 import PreSave from "./components/PreSave";
 import CalendarView from "./components/CalendarView";
+import TrophyCase from "./components/TrophyCase";
 import Scoring from "./components/Scoring";
 import "./styles.css";
 
@@ -16,6 +17,7 @@ function readHash() {
   if (typeof window === "undefined") return { view: "guide", app: null };
   const raw = decodeURIComponent(window.location.hash.replace("#", ""));
   if (raw === "calendario") return { view: "calendar", app: null };
+  if (raw === "vittorie") return { view: "trophy", app: null };
   if (raw === "punteggi") return { view: "scoring", app: null };
   if (APP_IDS.has(raw)) return { view: "guide", app: raw };
   return { view: "guide", app: null };
@@ -62,6 +64,10 @@ export default function App() {
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (view === "trophy") {
+    return <TrophyCase lang={lang} />;
+  }
 
   return (
     <div className="page">
