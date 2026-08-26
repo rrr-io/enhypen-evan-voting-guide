@@ -17,4 +17,11 @@ export const WINS = [
      label: { it: "1º posto", en: "#1" },
      clip: { type: "x", url: "https://x.com/showchampion1/status/2092540432244941274?s=46" },
    },
+    //{
+   //     id: "w2",
+  //      show: "mcountdown",
+   //     episode: "2026-08-26",
+   //     label: { it: "1º posto", en: "#1" },
+  //      clip: { type: "x", url: "https://x.com/showchampion1/status/2092540432244941274?s=46" },
+ //   },
 ];

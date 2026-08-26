@@ -3,6 +3,7 @@ import { SHOWS } from "../data/apps";
 import { WINS } from "../data/wins";
 import { toDate, LOCALE } from "../lib/weeks";
 import WinClip from "./WinClip";
+import TopBar from "./TopBar";
 
 const SHOW_ORDER = [ "champion", "mcountdown", "bank", "core", "inkigayo", ];
 
@@ -60,20 +61,17 @@ function Column({ show, wins, lang, order, onOpen }) {
       </span>
 
       {sorted.length > 0 && (
-        <>
-          <span className="tr-tally">{sorted.length}</span>
-          <div className="tr-crowns">
-            {sorted.map((w, i) => (
-              <Crown key={w.id} win={w} lang={lang} index={i} onOpen={onOpen} />
-            ))}
-          </div>
-        </>
+        <div className="tr-crowns">
+          {sorted.map((w, i) => (
+            <Crown key={w.id} win={w} lang={lang} index={i} onOpen={onOpen} />
+          ))}
+        </div>
       )}
     </div>
   );
 }
 
-export default function TrophyCase({ lang }) {
+export default function TrophyCase({ lang, setLang, t }) {
   const [open, setOpen] = useState(null);
   const byShow = Object.fromEntries(SHOW_ORDER.map((id) => [id, []]));
   WINS.forEach((w) => byShow[w.show]?.push(w));
@@ -86,6 +84,9 @@ export default function TrophyCase({ lang }) {
       total: total === 1 ? "vittoria" : "vittorie",
       hint: "Engene, clicca una corona per una sorpresa",
       close: "Chiudi",
+      loading: "Carico il post…",
+      failed: "Il post non si carica.",
+      openOnX: "Aprilo su X →",
       back: "← Torna alla guida",
     },
     en: {
@@ -94,15 +95,19 @@ export default function TrophyCase({ lang }) {
       total: total === 1 ? "win" : "wins",
       hint: "Engene, tap a crown for a surprise",
       close: "Close",
+      loading: "Loading the post…",
+      failed: "The post won't load.",
+      openOnX: "Open it on X →",
       back: "← Back to the guide",
     },
   }[lang];
 
   return (
-    <div className="tr-page">
+    <div className={`tr-page ${open ? "is-locked" : ""}`}>
       <div className="tr-wrap">
+        <TopBar t={t} lang={lang} setLang={setLang} eyebrow={copy.eyebrow} />
+
         <header className="tr-head">
-          <p className="tr-eyebrow">{copy.eyebrow}</p>
           <h1 className="tr-title">{copy.title}</h1>
           <p className="tr-total">
             <b>{total}</b> {copy.total}
@@ -126,6 +131,7 @@ export default function TrophyCase({ lang }) {
           clip={open.clip}
           title={`${SHOWS[open.show].name} · ${fmtDay(open.episode, lang)}`}
           closeLabel={copy.close}
+          copy={copy}
           onClose={() => setOpen(null)}
         />
       )}

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* Finestra che mostra il post della vittoria.
    Lo script di X viene caricato solo qui, cioè solo se qualcuno apre una
@@ -22,13 +22,21 @@ function loadX() {
   });
 }
 
+function tweetId(url) {
+  const m = String(url).match(/status\/(\d+)/);
+  return m ? m[1] : null;
+}
+
 function youtubeId(value) {
-  const m = value.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{6,})/);
+  const m = String(value).match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/
+  );
   return m ? m[1] : value;
 }
 
-export default function WinClip({ clip, title, onClose, closeLabel }) {
-  const box = useRef(null);
+export default function WinClip({ clip, title, onClose, closeLabel, copy }) {
+  const slot = useRef(null);
+  const [state, setState] = useState(clip.type === "x" ? "loading" : "ready");
 
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -41,14 +49,29 @@ export default function WinClip({ clip, title, onClose, closeLabel }) {
     };
   }, [onClose]);
 
+  /* createTweet costruisce il post dentro il contenitore vuoto: così non si
+     vede mai il link grezzo prima che l'embed sia pronto. */
   useEffect(() => {
-    if (clip.type !== "x" || !box.current) return;
+    if (clip.type !== "x") return;
+    const id = tweetId(clip.url);
+    if (!id) {
+      setState("error");
+      return;
+    }
     let alive = true;
     loadX()
       .then((twttr) => {
-        if (alive && box.current) twttr.widgets.load(box.current);
+        if (!alive || !slot.current) return null;
+        return twttr.widgets.createTweet(id, slot.current, {
+          align: "center",
+          dnt: true,
+          conversation: "none",
+        });
       })
-      .catch(() => {});
+      .then((el) => {
+        if (alive) setState(el ? "ready" : "error");
+      })
+      .catch(() => alive && setState("error"));
     return () => {
       alive = false;
     };
@@ -61,11 +84,20 @@ export default function WinClip({ clip, title, onClose, closeLabel }) {
           ×
         </button>
 
-        <div className="wc-body" ref={box}>
+        <div className="wc-body">
           {clip.type === "x" && (
-            <blockquote className="twitter-tweet" data-dnt="true">
-              <a href={clip.url}>{clip.url}</a>
-            </blockquote>
+            <>
+              {state === "loading" && <p className="wc-state">{copy.loading}</p>}
+              {state === "error" && (
+                <p className="wc-state">
+                  {copy.failed}{" "}
+                  <a href={clip.url} target="_blank" rel="noopener noreferrer">
+                    {copy.openOnX}
+                  </a>
+                </p>
+              )}
+              <div className={`wc-slot ${state === "ready" ? "is-ready" : ""}`} ref={slot} />
+            </>
           )}
 
           {clip.type === "youtube" && (
