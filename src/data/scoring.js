@@ -73,16 +73,6 @@ export const CRITERIA = {
 
 export const SCORING = [
   {
-    show: "bank",
-    slices: [
-      { key: "digitals", pct: 60, detail: { it: "MelOn, Genie, FLO, VIBE, Bugs", en: "MelOn, Genie, FLO, VIBE, Bugs" } },
-      { key: "physical", pct: 5, detail: { it: "Circle Album Chart", en: "Circle Album Chart" } },
-      { key: "broadcast", pct: 20, detail: { it: "KBS: TV, radio e contenuti digitali", en: "KBS: TV, radio and digital content" } },
-      { key: "sns", pct: 5, detail: { it: "Video musicale, Circle social chart, TikTok e YouTube Shorts", en: "Music video, Circle social chart, TikTok and YouTube Shorts" } },
-      { key: "prevote", pct: 10, apps: ["coogoong"] },
-    ],
-  },
-  {
     show: "champion",
     slices: [
       { key: "digitals", pct: 35, detail: { it: "Bugs, MelOn, Genie, FLO", en: "Bugs, MelOn, Genie, FLO" } },
@@ -90,6 +80,31 @@ export const SCORING = [
       { key: "broadcast", pct: 20, detail: { it: "Partecipazione a MBC M Show Champion", en: "Attendance at MBC M Show Champion" } },
       { key: "sns", pct: 10, detail: { it: "Visualizzazioni MV", en: "MV views" } },
       { key: "prevote", pct: 20, apps: ["idolchamp"] },
+    ],
+  },
+  {
+    show: "mcountdown",
+    note: {
+      it: "I criteri di M Countdown sommano 110%: il voto durante la diretta si aggiunge sopra il resto del punteggio.",
+      en: "M Countdown's criteria add up to 110%: the live vote is added on top of the rest of the score.",
+    },
+    slices: [
+      { key: "digitals", pct: 50, detail: { it: "Circle Global K-Pop Chart. Dati ottenuti da Spotify, Apple Music, Youtube Music, MelOn, Genie, Flo, Vibe, Bugs, TME Chart.", en: "Circle Global K-Pop Chart. Data compiled from Spotify, Apple Music, Youtube Music, MelOn, Genie, Flo, Vibe, Bugs, TME Chart." } },
+      { key: "physical", pct: 15, detail: { it: "Circle Album Chart", en: "Circle Album Chart" } },
+      { key: "broadcast", pct: 10, detail: { it: "Partecipazione a MCD e numero di volte che la canzone/MV è riprodotta negli show di Mnet TV", en: "Attending MCD and number of times the song/MV is played on Mnet TV shows." } },
+      { key: "sns", pct: 15, detail: { it: "Visualizzazioni MV e TikTok", en: "Music video views and TikTok" } },
+      { key: "prevote", pct: 10, apps: ["mnetplus"] },
+      { key: "livevote", pct: 10, apps: ["mnetplus"] },
+    ],
+  },
+  {
+    show: "bank",
+    slices: [
+      { key: "digitals", pct: 60, detail: { it: "MelOn, Genie, FLO, VIBE, Bugs", en: "MelOn, Genie, FLO, VIBE, Bugs" } },
+      { key: "physical", pct: 5, detail: { it: "Circle Album Chart", en: "Circle Album Chart" } },
+      { key: "broadcast", pct: 20, detail: { it: "KBS: TV, radio e contenuti digitali", en: "KBS: TV, radio and digital content" } },
+      { key: "sns", pct: 5, detail: { it: "Video musicale, Circle social chart, TikTok e YouTube Shorts", en: "Music video, Circle social chart, TikTok and YouTube Shorts" } },
+      { key: "prevote", pct: 10, apps: ["coogoong"] },
     ],
   },
   {
@@ -128,21 +143,6 @@ export const SCORING = [
           en: "MBC website, Korea only. It has its own window: Wednesday 9:00 – Thursday 11:00 KST",
         },
       },
-    ],
-  },
-  {
-    show: "mcountdown",
-    note: {
-      it: "I criteri di M Countdown sommano 110%: il voto durante la diretta si aggiunge sopra il resto del punteggio.",
-      en: "M Countdown's criteria add up to 110%: the live vote is added on top of the rest of the score.",
-    },
-    slices: [
-      { key: "digitals", pct: 50, detail: { it: "Circle Global K-Pop Chart. Dati ottenuti da Spotify, Apple Music, Youtube Music, MelOn, Genie, Flo, Vibe, Bugs, TME Chart.", en: "Circle Global K-Pop Chart. Data compiled from Spotify, Apple Music, Youtube Music, MelOn, Genie, Flo, Vibe, Bugs, TME Chart." } },
-      { key: "physical", pct: 15, detail: { it: "Circle Album Chart", en: "Circle Album Chart" } },
-      { key: "broadcast", pct: 10, detail: { it: "Partecipazione a MCD e numero di volte che la canzone/MV è riprodotta negli show di Mnet TV", en: "Attending MCD and number of times the song/MV is played on Mnet TV shows." } },
-      { key: "sns", pct: 15, detail: { it: "Visualizzazioni MV e TikTok", en: "Music video views and TikTok" } },
-      { key: "prevote", pct: 10, apps: ["mnetplus"] },
-      { key: "livevote", pct: 10, apps: ["mnetplus"] },
     ],
   },
 ];

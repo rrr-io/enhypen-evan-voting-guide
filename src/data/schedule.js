@@ -34,7 +34,7 @@
 /* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
    in cima e dice al lettore quanto è fresca l'informazione. */
 export const STATUS = {
-  updated: "2026-08-23",
+  updated: "2026-08-26",
   source: { label: "EN-CODE", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
 };
 
@@ -187,7 +187,7 @@ export const EVENTS = [
     id: "hotstage-30",
     show: "inkigayo",
     apps: ["higher"],
-    episode: "2026-08-30T15:20:00+09:00",
+    episode: "",
     prevote: { start: "2026-08-23T15:20:00+09:00", end: "2026-08-27T12:00:00+09:00" },
     liveVote: false,
     voteLabel: { it: "Hot Stage", en: "Hot Stage" },
