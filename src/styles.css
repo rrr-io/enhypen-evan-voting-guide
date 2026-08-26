@@ -567,7 +567,7 @@ body { margin: 0; }
 .pz-star { flex-shrink: 0; color: var(--c); font-size: 13px; line-height: 1;
   transform-origin: center; opacity: 0;
   animation: pz-star-pop .5s cubic-bezier(.2,1.5,.4,1) forwards,
-    pz-twinkle 3.4s ease-in-out infinite;
+  pz-twinkle 3.4s ease-in-out infinite;
   animation-delay: calc(700ms + var(--i) * 90ms), calc(1200ms + var(--i) * 90ms); }
 @keyframes pz-star-pop {
   from { opacity: 0; transform: scale(.2) rotate(-70deg); }
@@ -758,8 +758,8 @@ body { margin: 0; }
   --gold: #F2C230;       /* corpo della corona */
   --gold-dark: #C08A17;  /* fascia e gemme */ }
 .tr-col { display: flex; flex-direction: column; align-items: center; gap: 10px;
-  opacity: 0; animation: tr-col-in .5s ease forwards;
-  animation-delay: calc(var(--row) * 90ms); }
+  opacity: 0; animation: tr-col-in .9s cubic-bezier(.25,.9,.3,1) forwards;
+  animation-delay: calc(var(--row) * 200ms); }
 
 /* icona del programma, in evidenza sopra la colonna */
 .tr-logo { width: 100%; min-height: 62px; display: grid; place-items: center;
@@ -775,8 +775,8 @@ body { margin: 0; }
   width: 100%; }
 .tr-crown { margin: 0; padding: 0; border: 0; background: none; text-align: center;
   transform-origin: center; font: inherit; color: inherit;
-  opacity: 0; animation: tr-pop .5s cubic-bezier(.2,1.4,.35,1) forwards;
-  animation-delay: calc(var(--row, 0) * 90ms + var(--i) * 520ms + 300ms);
+  opacity: 0; animation: tr-pop .8s cubic-bezier(.2,1.35,.35,1) forwards;
+  animation-delay: calc(1700ms + var(--i) * 800ms);
   transition: transform .2s ease; }
 .tr-crown.has-clip { cursor: pointer; }
 .tr-crown:hover { transform: translateY(-4px) rotate(-3deg); }
@@ -792,7 +792,7 @@ body { margin: 0; }
 .tr-col.is-empty .tr-logo { opacity: .45; box-shadow: none; }
 
 .tr-shine { animation: tr-shine 4.5s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 700ms + 1.2s); }
+  animation-delay: calc(2600ms + var(--i) * 800ms); }
 
 /* invito sotto il titolo */
 .tr-hint { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em;
