@@ -50,7 +50,7 @@ function Crown({ win, lang, index, onOpen }) {
   );
 }
 
-function Column({ show, wins, lang, order, onOpen }) {
+function Column({ show, wins, lang, order, onOpen, seq }) {
   const info = SHOWS[show];
   const sorted = wins.slice().sort((a, b) => toDate(a.episode) - toDate(b.episode));
 
@@ -63,7 +63,7 @@ function Column({ show, wins, lang, order, onOpen }) {
       {sorted.length > 0 && (
         <div className="tr-crowns">
           {sorted.map((w, i) => (
-            <Crown key={w.id} win={w} lang={lang} index={i} onOpen={onOpen} />
+            <Crown key={w.id} win={w} lang={lang} index={seq.get(w.id)} onOpen={onOpen} />
           ))}
         </div>
       )}
@@ -76,6 +76,14 @@ export default function TrophyCase({ lang, setLang, t }) {
   const byShow = Object.fromEntries(SHOW_ORDER.map((id) => [id, []]));
   WINS.forEach((w) => byShow[w.show]?.push(w));
   const total = WINS.length;
+
+  /* Ordine di entrata valido per tutta la pagina: senza, la prima corona di
+     ogni programma avrebbe indice 0 e partirebbero tutte insieme. */
+  const seq = new Map(
+    WINS.slice()
+      .sort((a, b) => toDate(a.episode) - toDate(b.episode))
+      .map((w, i) => [w.id, i])
+  );
 
   const copy = {
     it: {
@@ -117,7 +125,15 @@ export default function TrophyCase({ lang, setLang, t }) {
 
         <div className="tr-case">
           {SHOW_ORDER.map((id, i) => (
-            <Column key={id} show={id} wins={byShow[id]} lang={lang} order={i} onOpen={setOpen} />
+            <Column
+              key={id}
+              show={id}
+              wins={byShow[id]}
+              lang={lang}
+              order={i}
+              seq={seq}
+              onOpen={setOpen}
+            />
           ))}
         </div>
 
