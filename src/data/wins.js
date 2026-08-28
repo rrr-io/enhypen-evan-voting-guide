@@ -22,11 +22,13 @@ export const WINS = [
         show: "mcountdown",
         episode: "2026-08-27",
         label: { it: "1º posto", en: "#1" },
+        clip: { type: "x", url: "https://x.com/enhypen_italia_/status/2092947128091849195?s=46" },
     },
     {
         id: "w3",
-        show: "musicbank",
+        show: "bank",
         episode: "2026-08-28",
         label: { it: "1º posto", en: "#1" },
+        clip: { type: "x", url: "https://x.com/enhypen_italia_/status/2093292482523959332?s=46" },
     },
 ];
