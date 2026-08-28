@@ -22,13 +22,11 @@ export const WINS = [
         show: "mcountdown",
         episode: "2026-08-27",
         label: { it: "1º posto", en: "#1" },
-        clip: { type: "x", url: "https://x.com/showchampion1/status/2092540432244941274?s=46" },
     },
     {
         id: "w3",
         show: "musicbank",
         episode: "2026-08-28",
         label: { it: "1º posto", en: "#1" },
-        clip: { type: "x", url: "https://x.com/showchampion1/status/2092540432244941274?s=46" },
     },
 ];
