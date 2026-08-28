@@ -130,12 +130,13 @@ export const EVENTS = [
       en: "30 Fan Points o 8 💎 per vote. Max 10 votes per account",
     },
   },
+  //to add prevote if confirmed
   {
     id: "champ-02",
     show: "champion",
     apps: ["idolchamp"],
     episode: "2026-09-02T17:00:00+09:00",
-    prevote: { start: "2026-08-28T20:00:00+09:00", end: "2026-08-31T14:59:00+09:00" },
+    prevote: { start: "", end: "" },
     liveVote: false,
   },
   {
@@ -144,7 +145,9 @@ export const EVENTS = [
     apps: ["mnetplus"],
     episode: "2026-09-03T18:00:00+09:00",
     prevote: { start: "2026-08-29T00:00:00+09:00", end: "2026-09-01T23:59:00+09:00" },
+    confirmed: true,
     liveVote: true,
+    stage: "unconfirmed",
   },
   {
     id: "bank-04",
@@ -194,8 +197,23 @@ export const EVENTS = [
     confirmed: true,
     voteUrl: "https://higher.fan/app/hotstage/6",
     note: {
-      it: "Non fa classifica: decide chi porta il palco extra. La votazione apre durante la diretta del 23 e chiude giovedì 27 alle 12:00 KST.",
+      it: "Non fa classifica: decide chi porta il palco extra. La votazione apre durante la diretta del 30 e chiude giovedì 27 alle 12:00 KST.",
       en: "It doesn't count towards the chart: it picks who gets the extra stage. Voting opens during the 23rd broadcast and closes on Thursday the 27th at 12:00 KST.",
+    },
+  },
+  {
+    id: "mcountdown-pick-31",
+    show: "mcountdown",
+    apps: ["mnetplus"],
+    episode: "",
+    prevote: { start: "2026-08-28T12:00:00+09:00", end: "2026-08-31T11:59:00+09:00" },
+    liveVote: false,
+    voteLabel: { it: "Weekly MCD Pick Stage", en: "Weekly MCD Pick Stage" },
+    confirmed: true,
+    voteUrl: "https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a8e295eee62464555ec2880%3Furl_fallback_type%3Dupdate",
+    note: {
+      it: "5 voti per account.  Il vincitore guadagna un video speciale e la candidatura a Montly MCD Pick Stage.",
+      en: "5 votes per account. The winner gets a special behind the scene video and the nomination for Monthly MCD Pick Stage.",
     },
   },
 ];

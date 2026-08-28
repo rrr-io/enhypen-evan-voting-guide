@@ -121,9 +121,9 @@ export const SCORING = [
   {
     show: "core",
     slices: [
-      { key: "digitals", pct: 50, detail: { it: "Circle Digital Chart", en: "Circle Digital Chart" } },
+      { key: "digitals", pct: 50, detail: { it: "Circle Digital Chart (Melon, Bugs, Genie, FLO, Spotify e VIBE)", en: "Circle Digital Chart (Melon, Bugs, Genie, FLO, Spotify e VIBE)" } },
       { key: "physical", pct: 10, detail: { it: "Circle Album Chart", en: "Circle Album Chart" } },
-      { key: "broadcast", pct: 5, detail: { it: "MBC: TV e radio", en: "MBC: TV and radio" } },
+      { key: "broadcast", pct: 5, detail: { it: "Trasmissione canzone/MV su MBC: TV e radio", en: "Times song/MV are played on MBC: TV and radio" } },
       { key: "sns", pct: 10, detail: { it: "Visualizzazioni MV", en: "MV views" } },
       { key: "prevote", pct: 10, apps: ["mubeat", "muniverse"] },
       {
@@ -139,8 +139,8 @@ export const SCORING = [
         key: "committee",
         pct: 5,
         detail: {
-          it: "Sito MBC, solo dalla Corea. Ha una finestra propria: mercoledì 9:00 – giovedì 11:00 KST",
-          en: "MBC website, Korea only. It has its own window: Wednesday 9:00 – Thursday 11:00 KST",
+          it: "Voti da un gruppo random di spettatori registrati su MBC viewer Panel Survey, solo dalla Corea",
+          en: "Vote from a random group of viewers registered on MBC viewer Panel Survey, Korea-only",
         },
       },
     ],
