@@ -34,7 +34,7 @@
 /* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
    in cima e dice al lettore quanto è fresca l'informazione. */
 export const STATUS = {
-  updated: "2026-08-26",
+  updated: "2026-08-29",
   source: { label: "EN-CODE", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
 };
 
