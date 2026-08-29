@@ -147,6 +147,7 @@ export const EVENTS = [
     prevote: { start: "2026-08-29T00:00:00+09:00", end: "2026-09-01T23:59:00+09:00" },
     confirmed: true,
     liveVote: true,
+    voteUrl:"https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a8e298fad9bac26374d260f%3Furl_fallback_type%3Dupdate",
     stage: "unconfirmed",
   },
   {
