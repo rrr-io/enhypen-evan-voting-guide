@@ -43,7 +43,7 @@ function Crown({ win, lang, index, onOpen }) {
         <circle cx="4" cy="11" r="3.4" fill="var(--gold-dark)" />
         <circle cx="28" cy="5" r="4" fill="var(--gold-dark)" />
         <circle cx="52" cy="11" r="3.4" fill="var(--gold-dark)" />
-        <rect className="tr-shine" x="12" y="12" width="6" height="22" fill="#fff" opacity=".4" />
+        <rect className="tr-shine" x="12" y="12" width="6" height="22" fill="#fff" />
       </svg>
       <span className="tr-when">{date}</span>
     </Tag>
@@ -77,6 +77,10 @@ export default function TrophyCase({ lang, setLang, t }) {
   WINS.forEach((w) => byShow[w.show]?.push(w));
   const total = WINS.length;
 
+  /* Grande slam: almeno una vittoria su ognuno dei cinque programmi.
+     Quando succede, dopo l'ultima corona parte la celebrazione. */
+  const slam = SHOW_ORDER.every((id) => byShow[id].length > 0);
+
   /* Ordine di entrata valido per tutta la pagina: senza, la prima corona di
      ogni programma avrebbe indice 0 e partirebbero tutte insieme. */
   const seq = new Map(
@@ -91,6 +95,7 @@ export default function TrophyCase({ lang, setLang, t }) {
       eyebrow: "ENHYPEN",
       total: total === 1 ? "vittoria" : "vittorie",
       hint: "Engene, clicca una corona per una sorpresa",
+      slam: "Cinque su cinque ✦ all-kill",
       close: "Chiudi",
       loading: "Carico il post…",
       failed: "Il post non si carica.",
@@ -102,6 +107,7 @@ export default function TrophyCase({ lang, setLang, t }) {
       eyebrow: "ENHYPEN",
       total: total === 1 ? "win" : "wins",
       hint: "Engene, tap a crown for a surprise",
+      slam: "Five out of five ✦ all-kill",
       close: "Close",
       loading: "Loading the post…",
       failed: "The post won't load.",
@@ -111,7 +117,10 @@ export default function TrophyCase({ lang, setLang, t }) {
   }[lang];
 
   return (
-    <div className={`tr-page ${open ? "is-locked" : ""}`}>
+    <div
+      className={`tr-page ${open ? "is-locked" : ""} ${slam ? "is-slam" : ""}`}
+      style={{ "--wins": total }}
+    >
       <div className="tr-wrap">
         <TopBar t={t} lang={lang} setLang={setLang} eyebrow={copy.eyebrow} />
 
@@ -121,6 +130,7 @@ export default function TrophyCase({ lang, setLang, t }) {
             <b>{total}</b> {copy.total}
           </p>
           {total > 0 && <p className="tr-hint">{copy.hint}</p>}
+          {slam && <p className="tr-slam">{copy.slam}</p>}
         </header>
 
         <div className="tr-case">

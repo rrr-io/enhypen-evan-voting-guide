@@ -37,5 +37,12 @@ export const WINS = [
         episode: "2026-08-29",
         label: { it: "1º posto", en: "#1" },
         clip: { type: "x", url: "https://x.com/enhypen_italia_/status/2093625661696913786?s=46" },
+    },
+    {
+        id: "w5",
+        show: "inkigayo",
+        episode: "2026-08-30",
+        label: { it: "1º posto", en: "#1" },
+        clip: { type: "x", url: "https://x.com/enhypen_italia_/status/2093977528109003062?s=46" },
     }
 ];

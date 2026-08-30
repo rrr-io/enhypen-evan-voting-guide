@@ -40,7 +40,7 @@ export const UI = {
     liveVote: "Voto live",
     broadcastOnly: "Solo diretta",
     stageUnconfirmed: "presenza da confermare",
-    stageNone: "senza palco",
+    stageNone: "no stage",
     statusOpen: "Aperto ora",
     goVote: "Vai al voto →",
     statusSoon: "Non ancora aperto",

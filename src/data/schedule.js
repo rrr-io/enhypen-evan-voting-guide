@@ -34,7 +34,7 @@
 /* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
    in cima e dice al lettore quanto è fresca l'informazione. */
 export const STATUS = {
-  updated: "2026-08-29",
+  updated: "2026-08-30",
   source: { label: "EN-CODE", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
 };
 
@@ -132,14 +132,6 @@ export const EVENTS = [
   },
   //to add prevote if confirmed
   {
-    id: "champ-02",
-    show: "champion",
-    apps: ["idolchamp"],
-    episode: "2026-09-02T17:00:00+09:00",
-    prevote: { start: "", end: "" },
-    liveVote: false,
-  },
-  {
     id: "mcd-03",
     show: "mcountdown",
     apps: ["mnetplus"],
@@ -148,7 +140,7 @@ export const EVENTS = [
     confirmed: true,
     liveVote: true,
     voteUrl:"https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a8e298fad9bac26374d260f%3Furl_fallback_type%3Dupdate",
-    stage: "unconfirmed",
+    stage: "none",
   },
   {
     id: "bank-04",
@@ -157,7 +149,9 @@ export const EVENTS = [
     episode: "2026-09-04T17:15:00+09:00",
     prevote: { start: "2026-08-30T15:00:00+09:00", end: "2026-09-02T11:00:00+09:00" },
     liveVote: false,
-    stage: "unconfirmed", // esempio: il voto c'è, il palco non è ancora confermato
+    confirmed: true,
+    voteUrl:"https://open.coogoong.com/?target=event%2Fdetail%3Fkey_event%3D813",
+    stage: "none", // esempio: il voto c'è, il palco non è ancora confermato
   },
   {
     id: "core-05",
