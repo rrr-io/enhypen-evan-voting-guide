@@ -34,7 +34,7 @@ export const WINS = [
     {
         id: "w4",
         show: "core",
-        episode: "2026-09-03",
+        episode: "2026-08-29",
         label: { it: "1º posto", en: "#1" },
         clip: { type: "x", url: "https://x.com/enhypen_italia_/status/2093625661696913786?s=46" },
     },
@@ -44,5 +44,11 @@ export const WINS = [
         episode: "2026-08-30",
         label: { it: "1º posto", en: "#1" },
         clip: { type: "x", url: "https://x.com/enhypen_italia_/status/2093977528109003062?s=46" },
-    }
+    },
+    {
+        id: "w6",
+        show: "mcountdown",
+        episode: "2026-09-03",
+        label: { it: "1º posto", en: "#1" },
+    },
 ];
