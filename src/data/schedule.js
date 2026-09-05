@@ -173,7 +173,7 @@ export const EVENTS = [
     id: "mpick-05",
     show: "core",
     apps: ["muniverse"],
-    episode: "2026-09-05T15:15:00+09:00",
+    episode: "",
     prevote: { start: "2026-08-22T17:00:00+09:00", end: "2026-08-27T12:00:00+09:00" },
     liveVote: false,
     voteLabel: { it: "Stage M Pick", en: "Stage M Pick" },
