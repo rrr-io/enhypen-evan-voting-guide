@@ -34,7 +34,7 @@
 /* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
    in cima e dice al lettore quanto è fresca l'informazione. */
 export const STATUS = {
-  updated: "2026-08-30",
+  updated: "2026-09-05",
   source: { label: "EN-CODE", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
 };
 
@@ -160,6 +160,17 @@ export const EVENTS = [
     episode: "2026-09-05T15:15:00+09:00",
     prevote: { start: "", end: "" },
     liveVote: true,
+  },
+  {
+    id: "mcd-10",
+    show: "mcountdown",
+    apps: ["mnetplus"],
+    episode: "2026-09-10T18:00:00+09:00",
+    prevote: { start: "2026-09-05T00:00:00+09:00", end: "2026-09-08T23:59:00+09:00" },
+    confirmed: true,
+    liveVote: true,
+    voteUrl:"https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a9615e3ee62464555ec2935%3Furl_fallback_type%3Dupdate",
+    stage: "none",
   },
 
   /* Votazione fuori classifica, per esempio lo Stage M Pick di Muniverse:
