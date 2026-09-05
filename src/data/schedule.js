@@ -154,14 +154,6 @@ export const EVENTS = [
     stage: "none", // esempio: il voto c'è, il palco non è ancora confermato
   },
   {
-    id: "core-05",
-    show: "core",
-    apps: ["mubeat", "muniverse"],
-    episode: "2026-09-05T15:15:00+09:00",
-    prevote: { start: "", end: "" },
-    liveVote: true,
-  },
-  {
     id: "mcd-10",
     show: "mcountdown",
     apps: ["mnetplus"],
