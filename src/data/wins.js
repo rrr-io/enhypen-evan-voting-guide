@@ -51,4 +51,10 @@ export const WINS = [
         episode: "2026-09-03",
         label: { it: "1º posto", en: "#1" },
     },
+    {
+        id: "w7",
+        show: "mcountdown",
+        episode: "2026-09-10",
+        label: { it: "1º posto", en: "#1" },
+    },
 ];

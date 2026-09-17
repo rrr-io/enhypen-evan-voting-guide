@@ -149,8 +149,12 @@ function Row({ event, week, lang, t, now, todayIdx, hit, onHit }) {
 }
 
 export default function CalendarTimeline({ lang, t, now }) {
-  const weeks = buildWeeks("overlap");
+  const all = buildWeeks("overlap");
   const today = startOfDay(new Date(now));
+  const weeks = all.filter((w) => today <= w.end);
+  // settimane già concluse: in fondo, dalla più recente
+  const past = all.filter((w) => today > w.end).reverse();
+  const [showPast, setShowPast] = useState(false);
   // [primo, ultimo] indice di giorno della riga sotto il dito o il mouse
   const [hit, setHit] = useState(null);
 
@@ -162,8 +166,27 @@ export default function CalendarTimeline({ lang, t, now }) {
         <span className="lg-bubble lg-bubble-live">{t.pinBoth}</span>
       </p>
 
-      {weeks.map((week) => {
-        const todayIdx =
+      {weeks.map((week) => renderWeek(week))}
+
+      {past.length > 0 && (
+        <section className="past">
+          <button
+            className="past-head"
+            aria-expanded={showPast}
+            onClick={() => setShowPast((v) => !v)}
+          >
+            {t.pastEvents}
+            <span className="past-count">{past.length}</span>
+            <span className="dv-chev" aria-hidden="true" />
+          </button>
+          {showPast && <div className="past-body">{past.map((week) => renderWeek(week))}</div>}
+        </section>
+      )}
+    </div>
+  );
+
+  function renderWeek(week) {
+    const todayIdx =
           today >= week.start && today <= week.end ? dayIndex(today, week.start) : -1;
         return (
           <section key={week.id} className="tl-week">
@@ -202,9 +225,7 @@ export default function CalendarTimeline({ lang, t, now }) {
                 }
               />
             ))}
-          </section>
-        );
-      })}
-    </div>
-  );
+      </section>
+    );
+  }
 }

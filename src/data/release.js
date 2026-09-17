@@ -29,6 +29,8 @@ export const ALBUMS = [
     artist: "EVAN",
     cover: cover("deathofme.jpg"),
     url: "https://evan.lnk.to/DEATHOFME",
-    action: "presave",
+    action: "listen",
+    embed:
+      "https://open.spotify.com/embed/album/5hYH4zxmh1ePXZaxFyj9wB?utm_source=generator&theme=0",
   },
 ];

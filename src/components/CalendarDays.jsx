@@ -139,30 +139,52 @@ function Day({ day, lang, t, now, open, onToggle, isToday }) {
 
 export default function CalendarDays({ lang, t, now }) {
   const today = startOfDay(new Date(now)).getTime();
-  // i giorni passati non si mostrano più
-  const days = buildDays().filter((d) => d.date.getTime() >= today);
+  const all = buildDays();
+  const days = all.filter((d) => d.date.getTime() >= today);
+  // i giorni passati restano consultabili, raccolti in fondo dal più recente
+  const past = all.filter((d) => d.date.getTime() < today).reverse();
+
   // su telefono una lista tutta aperta è troppo lunga: aperti i primi due giorni
   const [openIds, setOpenIds] = useState(() => days.slice(0, 2).map((d) => d.id));
+  const [showPast, setShowPast] = useState(false);
 
   const toggle = (id) =>
     setOpenIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
-  if (days.length === 0) return <p className="dv-empty">{t.dayNothing}</p>;
+  const renderDay = (day) => (
+    <Day
+      key={day.id}
+      day={day}
+      lang={lang}
+      t={t}
+      now={now}
+      isToday={day.date.getTime() === today}
+      open={openIds.includes(day.id)}
+      onToggle={() => toggle(day.id)}
+    />
+  );
+
+  if (days.length === 0 && past.length === 0)
+    return <p className="dv-empty">{t.dayNothing}</p>;
 
   return (
     <div className="dv">
-      {days.map((day) => (
-        <Day
-          key={day.id}
-          day={day}
-          lang={lang}
-          t={t}
-          now={now}
-          isToday={day.date.getTime() === today}
-          open={openIds.includes(day.id)}
-          onToggle={() => toggle(day.id)}
-        />
-      ))}
+      {days.length > 0 ? days.map(renderDay) : <p className="dv-empty">{t.dayNothing}</p>}
+
+      {past.length > 0 && (
+        <section className="past">
+          <button
+            className="past-head"
+            aria-expanded={showPast}
+            onClick={() => setShowPast((v) => !v)}
+          >
+            {t.pastEvents}
+            <span className="past-count">{past.length}</span>
+            <span className="dv-chev" aria-hidden="true" />
+          </button>
+          {showPast && <div className="past-body">{past.map(renderDay)}</div>}
+        </section>
+      )}
     </div>
   );
 }

@@ -892,3 +892,19 @@ body { margin: 0; }
   .tr-shine { animation: none; opacity: 0; }
   .tr-crown:hover { transform: none; }
 }
+
+/* ---- eventi passati, raccolti in fondo alle due viste ---- */
+.past { margin-top: 30px; border-top: 1px solid var(--ink); }
+.past-head { width: 100%; display: flex; align-items: center; gap: 10px;
+  background: none; border: 0; padding: 16px 2px; cursor: pointer; text-align: left;
+  color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  letter-spacing: .14em; text-transform: uppercase; transition: color .18s; }
+.past-head:hover { color: var(--ink); }
+.past-head:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; border-radius: 6px; }
+.past-count { border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px;
+  font-size: 9.5px; }
+.past-head .dv-chev { margin-left: auto; }
+.past-head[aria-expanded="true"] .dv-chev { transform: rotate(-135deg); margin-top: 3px; }
+/* i passati restano leggibili ma in secondo piano */
+.past-body { opacity: .6; padding-bottom: 8px; }
+.past-body:hover { opacity: 1; }
