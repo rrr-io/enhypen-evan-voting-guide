@@ -12,7 +12,7 @@ const cover = (p) => `${import.meta.env.BASE_URL}icons/covers/${p}`;
    Se c'è, al posto della barra compare il player e sotto il link a tutte le
    piattaforme. */
 
-export const ALBUMS = [
+const ALL_ALBUMS = [
   {
     id: "enhypen",
     title: "the sin:bliss",
@@ -34,3 +34,9 @@ export const ALBUMS = [
       "https://open.spotify.com/embed/album/5hYH4zxmh1ePXZaxFyj9wB?utm_source=generator&theme=0",
   },
 ];
+
+/* Sul dominio proprio la pagina parla solo di ENHYPEN. */
+export const ALBUMS =
+  import.meta.env.VITE_SHOW_EVAN === "false"
+    ? ALL_ALBUMS.filter((a) => a.id !== "evan")
+    : ALL_ALBUMS;

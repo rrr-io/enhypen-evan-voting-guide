@@ -1,3 +1,7 @@
+/* VITE_SHOW_EVAN=false toglie i riferimenti a Evan: serve alla build per il
+   dominio proprio, dove la pagina parla solo di ENHYPEN. */
+const WITH_EVAN = import.meta.env.VITE_SHOW_EVAN !== "false";
+
 /* Testi dell'interfaccia / Interface copy.
    Per cambiare una scritta modifica qui, in entrambe le lingue. */
 
@@ -10,10 +14,14 @@ export const UI = {
   it: {
     eyebrow: "Fan guide · voting",
     // Una voce per riga del titolo: qui decidi tu dove va a capo.
-    titleLines: ["Guida Votazioni", "Comeback", "Enhypen & Evan"],
+    titleLines: WITH_EVAN
+      ? ["Guida Votazioni", "Comeback", "Enhypen & Evan"]
+      : ["Guida Votazioni", "Comeback", "Enhypen"],
     intro:
       "Ogni scheda dice quale valuta serve, come raccoglierla e quando scade. Tocca una scheda per tenerla in evidenza." +
-        "\nLa fanbase di ENHYPEN ITALIA e EVAN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ",
+        (WITH_EVAN
+          ? "\nLa fanbase di ENHYPEN ITALIA e EVAN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ"
+          : "\nLa fanbase di ENHYPEN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ"),
     langLabel: "Lingua",
     releasesTitle: "Uscite",
     presaveNow: "Presave",
@@ -83,10 +91,14 @@ export const UI = {
   },
   en: {
     eyebrow: "Fan guide · voting",
-    titleLines: ["Voting Guide", "Enhypen & Evan", "Comeback"],
+    titleLines: WITH_EVAN
+      ? ["Voting Guide", "Enhypen & Evan", "Comeback"]
+      : ["Voting Guide", "Enhypen", "Comeback"],
     intro:
       "Each card tells you which currency you need, how to collect it and when it expires. Tap a Voting App card to keep it highlighted. "+
-        "\nThe ENHYPEN italia and EVAN italia fanbase wish you fun and fighting for the comeback! (๑˃ᴗ˂)ﻭ",
+        (WITH_EVAN
+          ? "\nThe ENHYPEN italia and EVAN italia fanbase wish you fun and fighting for the comeback! (๑˃ᴗ˂)ﻭ"
+          : "\nThe ENHYPEN italia fanbase wishes you fun and fighting for the comeback! (๑˃ᴗ˂)ﻭ"),
     langLabel: "Language",
     releasesTitle: "Releases",
     presaveNow: "Presave",
