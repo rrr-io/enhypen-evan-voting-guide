@@ -20,8 +20,8 @@ export const UI = {
     intro:
       "Ogni scheda dice quale valuta serve, come raccoglierla e quando scade. Tocca una scheda per tenerla in evidenza." +
         (WITH_EVAN
-          ? "\nLa fanbase di ENHYPEN ITALIA e EVAN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ"
-          : "\nLa fanbase di ENHYPEN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ"),
+          ? "\nLa fanbase di ENHYPEN ITALIA e EVAN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ ✿ "
+          : "\nLa fanbase di ENHYPEN ITALIA vi augura buon divertimento e fighting per il comeback! (๑˃ᴗ˂)ﻭ ✿ "),
     langLabel: "Lingua",
     releasesTitle: "Uscite",
     presaveNow: "Presave",

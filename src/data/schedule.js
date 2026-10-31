@@ -40,7 +40,7 @@ export const STATUS = {
 
 /* Titolo mostrato in cima al calendario. Lascia title vuoto per non mostrarlo. */
 export const ALBUM = {
-  title: "the sin:bliss",
+  title: "the sin:parallel world ✿ ",
   subtitle: { it: "", en: "" },
 };
 
