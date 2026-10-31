@@ -15,13 +15,13 @@ const cover = (p) => `${import.meta.env.BASE_URL}icons/covers/${p}`;
 const ALL_ALBUMS = [
   {
     id: "enhypen",
-    title: "the sin:bliss",
+    title: "the sin:parallel world",
     artist: "ENHYPEN",
     cover: cover("thesinbliss.jpg"),
-    url: "https://enhypen.lnk.to/THESINBLISS",
+    url: "https://enhypen.lnk.to/thesinparallelworld",
     action: "listen",
     embed:
-      "https://open.spotify.com/embed/album/2os46ReV779WlryAHPL6ko?utm_source=generator&theme=0",
+      "",
   },
   {
     id: "evan",
