@@ -1,13 +1,22 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { buildDays, startOfDay, toDate, LOCALE } from "../lib/weeks";
-import { drawCard, cardFileName, downloadCanvas, FORMATS } from "../lib/cardImage";
+import {
+  drawCard,
+  drawAppCard,
+  appsInPlay,
+  cardFileName,
+  downloadCanvas,
+  FORMATS,
+} from "../lib/cardImage";
 import { track } from "../lib/track";
 
-/* Genera la card di recap di una giornata, nei due formati social.
+/* Genera le card da postare sui social, nei due formati.
+   Due tipi: il recap di una giornata, oppure una app con il suo tutorial.
    L'immagine si disegna qui nel browser: niente va su nessun server. */
 
 export default function ShareCard({ lang, t, now }) {
   const [open, setOpen] = useState(false);
+  const [kind, setKind] = useState("day");
   const [format, setFormat] = useState("post");
   const [busy, setBusy] = useState(false);
   const canvasRef = useRef(null);
@@ -17,9 +26,14 @@ export default function ShareCard({ lang, t, now }) {
     () => buildDays().filter((d) => d.date.getTime() >= today),
     [today]
   );
+  const apps = useMemo(() => appsInPlay(now), [now]);
+
   const [dayId, setDayId] = useState(() => days[0]?.id || null);
+  const [appId, setAppId] = useState(() => apps[0]?.id || null);
 
   const day = days.find((d) => d.id === dayId) || days[0] || null;
+  const app = apps.find((a) => a.id === appId) || apps[0] || null;
+  const subject = kind === "app" ? app : day;
 
   /* chiusura con Esc e pagina bloccata dietro al riquadro */
   useEffect(() => {
@@ -34,30 +48,33 @@ export default function ShareCard({ lang, t, now }) {
     };
   }, [open]);
 
-  /* ridisegna a ogni cambio di giorno, formato o lingua */
+  /* ridisegna a ogni cambio di tipo, soggetto, formato o lingua */
   useEffect(() => {
-    if (!open || !day || !canvasRef.current) return;
+    if (!open || !subject || !canvasRef.current) return;
     let alive = true;
     setBusy(true);
-    drawCard(canvasRef.current, { format, day, lang, t, now })
-      .finally(() => alive && setBusy(false));
+    const job =
+      kind === "app"
+        ? drawAppCard(canvasRef.current, { format, app, lang, t })
+        : drawCard(canvasRef.current, { format, day, lang, t, now });
+    job.finally(() => alive && setBusy(false));
     return () => {
       alive = false;
     };
-  }, [open, day, format, lang, now, t]);
+  }, [open, kind, subject, app, day, format, lang, now, t]);
 
-  if (days.length === 0) return null;
+  if (days.length === 0 && apps.length === 0) return null;
 
-  const label = (d) =>
+  const dayLabel = (d) =>
     new Intl.DateTimeFormat(LOCALE[lang], { weekday: "short", day: "numeric" }).format(
       toDate(d.date)
     );
 
   const save = async () => {
-    if (!canvasRef.current || !day) return;
+    if (!canvasRef.current || !subject) return;
     setBusy(true);
-    await downloadCanvas(canvasRef.current, cardFileName(day, format, lang));
-    track(`card/${format}/${day.id}`, "Card recap");
+    await downloadCanvas(canvasRef.current, cardFileName(subject, format, lang));
+    track(`card/${kind}/${format}/${subject.id}`, "Card social");
     setBusy(false);
   };
 
@@ -68,7 +85,7 @@ export default function ShareCard({ lang, t, now }) {
           className="sc-open"
           onClick={() => {
             setOpen(true);
-            track("card/apri", "Card recap");
+            track("card/apri", "Card social");
           }}
         >
           {t.cardMake}
@@ -93,18 +110,51 @@ export default function ShareCard({ lang, t, now }) {
             </header>
 
             <div className="sc-controls">
-              <div className="sc-days" role="group" aria-label={t.cardPickDay}>
-                {days.map((d) => (
-                  <button
-                    key={d.id}
-                    className={`chip ${d.id === day?.id ? "chip-on" : ""}`}
-                    aria-pressed={d.id === day?.id}
-                    onClick={() => setDayId(d.id)}
-                  >
-                    {label(d)}
-                  </button>
-                ))}
+              <div className="sc-kinds" role="group" aria-label={t.cardKind}>
+                {[
+                  ["day", t.cardKindDay, days.length],
+                  ["app", t.cardKindApp, apps.length],
+                ].map(([id, label, n]) =>
+                  n === 0 ? null : (
+                    <button
+                      key={id}
+                      className={`chip ${kind === id ? "chip-on" : ""}`}
+                      aria-pressed={kind === id}
+                      onClick={() => setKind(id)}
+                    >
+                      {label}
+                    </button>
+                  )
+                )}
               </div>
+
+              {kind === "day" ? (
+                <div className="sc-days" role="group" aria-label={t.cardPickDay}>
+                  {days.map((d) => (
+                    <button
+                      key={d.id}
+                      className={`chip ${d.id === day?.id ? "chip-on" : ""}`}
+                      aria-pressed={d.id === day?.id}
+                      onClick={() => setDayId(d.id)}
+                    >
+                      {dayLabel(d)}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="sc-days" role="group" aria-label={t.cardPickApp}>
+                  {apps.map((a) => (
+                    <button
+                      key={a.id}
+                      className={`chip ${a.id === app?.id ? "chip-on" : ""}`}
+                      aria-pressed={a.id === app?.id}
+                      onClick={() => setAppId(a.id)}
+                    >
+                      {a.name}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <div className="sc-formats" role="group" aria-label={t.cardFormat}>
                 {Object.keys(FORMATS).map((id) => (

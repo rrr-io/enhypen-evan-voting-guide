@@ -949,6 +949,7 @@ body { margin: 0; }
 .sc-days::-webkit-scrollbar { display: none; }
 .sc-days .chip { flex: none; }
 .sc-formats { display: flex; gap: 6px; }
+.sc-kinds { display: flex; gap: 6px; }
 
 .sc-stage { flex: 1; min-height: 0; overflow: auto; display: grid; place-items: center;
   padding: 14px; background: #F4F4F4; }

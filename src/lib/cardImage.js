@@ -8,6 +8,7 @@
    Per cambiare i colori o le misure basta toccare THEME e FORMATS. */
 
 import { SHOWS, APPS, asset } from "../data/apps";
+import { EVENTS } from "../data/schedule";
 import { toDate, startOfDay, statusOf, LOCALE } from "./weeks";
 
 const BY_ID = Object.fromEntries(APPS.map((a) => [a.id, a]));
@@ -129,6 +130,21 @@ function clamp(ctx, text, max) {
   let s = text;
   while (s.length > 1 && ctx.measureText(s + "…").width > max) s = s.slice(0, -1);
   return s + "…";
+}
+
+/* Spezza un testo lungo in righe che stanno nella larghezza data. */
+function wrap(ctx, text, max) {
+  const out = [];
+  let line = "";
+  for (const word of String(text).split(/\s+/)) {
+    const next = line ? line + " " + word : word;
+    if (line && ctx.measureText(next).width > max) {
+      out.push(line);
+      line = word;
+    } else line = next;
+  }
+  if (line) out.push(line);
+  return out;
 }
 
 /* Rimpicciolisce il titolo finché non entra nella larghezza utile. */
@@ -253,8 +269,13 @@ function drawRow(ctx, f, row, x, y, maxW, images) {
     } else {
       ctx.save();
       roundRect(ctx, x, y, box, box, box * 0.26);
+      // fondo bianco: molte icone hanno i bordi trasparenti e lascerebbero
+      // passare i fiorellini
+      ctx.fillStyle = THEME.paper;
+      ctx.fill();
       ctx.clip();
-      ctx.drawImage(img, x, y, box, box);
+      const o = box * 0.02; // alcune icone hanno un bordino grigio: si taglia
+      ctx.drawImage(img, x - o, y - o, box + o * 2, box + o * 2);
       ctx.restore();
       let right = x + box;
       if (img2) {
@@ -312,7 +333,73 @@ function drawRow(ctx, f, row, x, y, maxW, images) {
   }
 }
 
-/* ---------- la card ---------- */
+/* ---------- pezzi comuni alle due card ---------- */
+
+/* Logo della fanbase e occhiello. Torna la y da cui continuare. */
+function drawHeader(ctx, f, logo, eyebrow) {
+  let y = f.logoTop;
+  if (logo) {
+    const w = f.logoW;
+    const h = (logo.height / logo.width) * w;
+    ctx.drawImage(logo, (f.w - w) / 2, y, w, h);
+    y += h + f.blockGap * 0.9;
+  } else {
+    y += f.blockGap;
+  }
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillStyle = THEME.muted;
+  ctx.font = `400 ${f.eyebrow}px 'JetBrains Mono', monospace`;
+  tracked(ctx, eyebrow.toUpperCase(), f.w / 2, y, f.eyebrow * 0.34);
+  return y + f.eyebrow * 2.2;
+}
+
+/* Titolo grosso e filetto sotto. Torna la y da cui continuare. */
+function drawTitle(ctx, f, text, y) {
+  const maxW = f.w - f.pad * 2;
+  const size = fitFont(ctx, text, maxW, f.title, "Anton, sans-serif");
+  ctx.fillStyle = THEME.red;
+  ctx.textAlign = "center";
+  ctx.font = `${size}px Anton, sans-serif`;
+  ctx.fillText(text, f.w / 2, y + size * 0.78);
+  y += size * 1.12;
+  ctx.strokeStyle = THEME.red;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(f.pad, y);
+  ctx.lineTo(f.w - f.pad, y);
+  ctx.stroke();
+  return y + f.blockGap;
+}
+
+/* Indirizzo del sito e firma. */
+function drawFooter(ctx, f) {
+  const host = typeof window !== "undefined" ? window.location.host : "";
+  if (host) {
+    ctx.textAlign = "center";
+    ctx.fillStyle = THEME.muted;
+    ctx.font = `400 ${f.eyebrow}px 'JetBrains Mono', monospace`;
+    tracked(ctx, host, f.w / 2, f.h - f.pad * 0.92, f.eyebrow * 0.18);
+  }
+  ctx.fillStyle = THEME.red;
+  ctx.font = `700 ${f.eyebrow}px 'JetBrains Mono', monospace`;
+  tracked(ctx, "ENHYPEN ITALIA", f.w / 2, f.h - f.pad * 0.44, f.eyebrow * 0.5);
+}
+
+/* Etichettina rossa distanziata sopra un blocco. */
+function drawLabel(ctx, f, text, y, after = 1.9) {
+  ctx.textAlign = "left";
+  ctx.fillStyle = THEME.red;
+  ctx.font = `700 ${f.section}px 'JetBrains Mono', monospace`;
+  let x = f.pad;
+  for (const c of [...text.toUpperCase()]) {
+    ctx.fillText(c, x, y);
+    x += ctx.measureText(c).width + f.section * 0.3;
+  }
+  return y + f.section * after;
+}
+
+/* ---------- card della giornata ---------- */
 
 export async function drawCard(canvas, { format, day, lang, t, now }) {
   const f = FORMATS[format] || FORMATS.post;
@@ -338,43 +425,10 @@ export async function drawCard(canvas, { format, day, lang, t, now }) {
 
   const left = f.pad;
   const maxW = f.w - f.pad * 2;
-  let y = f.logoTop;
 
-  if (logo) {
-    const w = f.logoW;
-    const h = (logo.height / logo.width) * w;
-    ctx.drawImage(logo, (f.w - w) / 2, y, w, h);
-    y += h + f.blockGap * 0.9;
-  } else {
-    y += f.blockGap;
-  }
-
-  ctx.textAlign = "left";
-  ctx.textBaseline = "alphabetic";
-
-  // occhiello
-  ctx.fillStyle = THEME.muted;
-  ctx.font = `400 ${f.eyebrow}px 'JetBrains Mono', monospace`;
-  tracked(ctx, t.cardEyebrow.toUpperCase(), f.w / 2, y, f.eyebrow * 0.34);
-  y += f.eyebrow * 2.2;
-
-  // data
+  let y = drawHeader(ctx, f, logo, t.cardEyebrow);
   const title = fmt(day.date, lang, { weekday: "long", day: "numeric", month: "long" }).toUpperCase();
-  const size = fitFont(ctx, title, maxW, f.title, "Anton, sans-serif");
-  ctx.fillStyle = THEME.red;
-  ctx.textAlign = "center";
-  ctx.font = `${size}px Anton, sans-serif`;
-  ctx.fillText(title, f.w / 2, y + size * 0.78);
-  y += size * 1.12;
-
-  // filetto
-  ctx.strokeStyle = THEME.red;
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(left, y);
-  ctx.lineTo(f.w - left, y);
-  ctx.stroke();
-  y += f.blockGap;
+  y = drawTitle(ctx, f, title, y);
 
   const rowH = f.icon + f.rowGap;
 
@@ -403,15 +457,7 @@ export async function drawCard(canvas, { format, day, lang, t, now }) {
   if (room > contentH) y += (room - contentH) / 2;
 
   const block = ({ label, shown, hidden }) => {
-    ctx.textAlign = "left";
-    ctx.fillStyle = THEME.red;
-    ctx.font = `700 ${f.section}px 'JetBrains Mono', monospace`;
-    let x = left;
-    for (const c of [...label.toUpperCase()]) {
-      ctx.fillText(c, x, y);
-      x += ctx.measureText(c).width + f.section * 0.3;
-    }
-    y += f.section * 1.9;
+    y = drawLabel(ctx, f, label, y);
 
     for (const r of shown) {
       drawRow(ctx, f, r, left, y, maxW, images);
@@ -437,24 +483,137 @@ export async function drawCard(canvas, { format, day, lang, t, now }) {
     ctx.fillText(t.dayNothing, f.w / 2, y + f.name);
   }
 
-  // piede: indirizzo del sito e firma
-  const host = typeof window !== "undefined" ? window.location.host : "";
-  if (host) {
-    ctx.textAlign = "center";
-    ctx.fillStyle = THEME.muted;
-    ctx.font = `400 ${f.eyebrow}px 'JetBrains Mono', monospace`;
-    tracked(ctx, host, f.w / 2, f.h - f.pad * 0.92, f.eyebrow * 0.18);
-  }
-  ctx.fillStyle = THEME.red;
-  ctx.font = `700 ${f.eyebrow}px 'JetBrains Mono', monospace`;
-  tracked(ctx, "ENHYPEN ITALIA", f.w / 2, f.h - f.pad * 0.44, f.eyebrow * 0.5);
+  drawFooter(ctx, f);
+  return canvas;
+}
 
+/* ---------- card di una app: come votare, come sul sito ---------- */
+
+/* Le app toccate dalle votazioni ancora da venire, nell'ordine del calendario. */
+export function appsInPlay(now) {
+  const from = startOfDay(new Date(now)).getTime();
+  const ids = [];
+  for (const e of [...EVENTS].sort((a, b) => toDate(a.episode) - toDate(b.episode))) {
+    const end = e.prevote ? toDate(e.prevote.end) : toDate(e.episode);
+    if (end.getTime() < from) continue;
+    for (const id of e.apps) if (BY_ID[id] && !ids.includes(id)) ids.push(id);
+  }
+  return ids.map((id) => BY_ID[id]);
+}
+
+export async function drawAppCard(canvas, { format, app, lang, t }) {
+  const f = FORMATS[format] || FORMATS.post;
+  canvas.width = f.w;
+  canvas.height = f.h;
+  const ctx = canvas.getContext("2d");
+
+  const logo = await loadImage(asset("icons/enitalia.png"));
+  const badge = await loadImage(app.logo);
+  await waitForFonts();
+
+  background(ctx, f, hash(app.id + format));
+
+  const left = f.pad;
+  const maxW = f.w - f.pad * 2;
+
+  const show = SHOWS[app.show]?.name || "";
+  let y = drawHeader(ctx, f, logo, t.cardAppEyebrow);
+
+  // icona della app, grande e centrata
+  if (badge) {
+    const s = f.icon * 2.3;
+    ctx.save();
+    roundRect(ctx, (f.w - s) / 2, y, s, s, s * 0.24);
+    ctx.fillStyle = THEME.paper;
+    ctx.fill();
+    ctx.clip();
+    const o = s * 0.02;
+    ctx.drawImage(badge, (f.w - s) / 2 - o, y - o, s + o * 2, s + o * 2);
+    ctx.restore();
+    y += s + f.blockGap * 0.6;
+  }
+
+  // nome della app, e sotto per quale show si usa
+  const size = fitFont(ctx, app.name.toUpperCase(), maxW, f.title, "Anton, sans-serif");
+  ctx.fillStyle = THEME.red;
+  ctx.textAlign = "center";
+  ctx.font = `${size}px Anton, sans-serif`;
+  ctx.fillText(app.name.toUpperCase(), f.w / 2, y + size * 0.78);
+  y += size * 1.3;
+
+  ctx.fillStyle = THEME.muted;
+  ctx.font = `400 ${f.eyebrow}px 'JetBrains Mono', monospace`;
+  tracked(ctx, `${show} · ${app.voteType[lang]}`.toUpperCase(), f.w / 2, y, f.eyebrow * 0.2);
+  y += f.eyebrow * 1.8;
+
+  ctx.strokeStyle = THEME.red;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(left, y);
+  ctx.lineTo(f.w - left, y);
+  ctx.stroke();
+  y += f.blockGap;
+
+  /* Quello che si legge nella scheda sul sito: valuta, passaggi, scadenza. */
+  const steps = app.collect?.[lang] || [];
+  const sections = [
+    { label: t.cardAppWhat, lines: [app.currency[lang]] },
+    { label: t.cardAppHow, steps },
+    { label: t.cardAppExpiry, lines: [app.expiry[lang]] },
+  ];
+
+  /* Si misura prima: se il contenuto non ci sta si stringe un po', e solo se
+     non basta si centra. Il piede non va mai calpestato. */
+  const body = `400 ${f.meta * 1.15}px 'Instrument Sans', sans-serif`;
+  ctx.font = body;
+  const measured = sections.map((s) => ({
+    ...s,
+    rows: s.steps
+      ? s.steps.length
+      : s.lines.reduce((n, l) => n + wrap(ctx, l, maxW).length, 0),
+  }));
+  const rows = measured.reduce((n, s) => n + s.rows, 0);
+  const labels = measured.length;
+  const room = f.h - f.pad * 1.8 - y;
+  const natural = labels * (f.section * 1.45 + f.blockGap) + rows * f.meta * 1.9;
+  const k = Math.max(0.74, Math.min(1, (room - f.blockGap) / natural));
+  const lineH = f.meta * 1.9 * k;
+  const gap = f.blockGap * k;
+  const contentH = labels * (f.section * 1.45 + gap) - gap + rows * lineH;
+  if (room > contentH) y += (room - contentH) / 2;
+
+  for (const s of measured) {
+    y = drawLabel(ctx, f, s.label, y, 1.45);
+    ctx.textAlign = "left";
+    ctx.font = body;
+    if (s.steps) {
+      for (const step of s.steps) {
+        ctx.fillStyle = THEME.red;
+        ctx.fillText("—", left, y + f.meta);
+        ctx.fillStyle = THEME.ink;
+        ctx.fillText(clamp(ctx, step, maxW - f.meta * 2.2), left + f.meta * 2.2, y + f.meta);
+        y += lineH;
+      }
+    } else {
+      ctx.fillStyle = THEME.ink;
+      for (const line of s.lines) {
+        for (const w of wrap(ctx, line, maxW)) {
+          ctx.fillText(w, left, y + f.meta);
+          y += lineH;
+        }
+      }
+    }
+    y += gap;
+  }
+
+  drawFooter(ctx, f);
   return canvas;
 }
 
 /* Il file da scaricare. */
-export function cardFileName(day, format, lang) {
-  return `${lang === "en" ? "voting" : "votazioni"}-${day.id}-${format}.png`;
+export function cardFileName(subject, format, lang) {
+  const base = lang === "en" ? "voting" : "votazioni";
+  return `${base}-${subject.id}-${format}.png`;
 }
 
 export function downloadCanvas(canvas, name) {
