@@ -96,7 +96,7 @@ export const UI = {
     cardPickApp: "Scegli la app",
     cardAppEyebrow: "come si vota",
     cardAppWhat: "Serve",
-    cardAppHow: "Come raccoglierla",
+    cardAppHow: "Come raccogliere",
     cardAppExpiry: "Scade",
     cardEyebrow: "promemoria votazioni",
     cardShows: "Dirette",
