@@ -4,6 +4,7 @@ import { anyTentative } from "../lib/weeks";
 import CalendarTimeline from "./CalendarTimeline";
 import CalendarMini from "./CalendarMini";
 import CalendarDays from "./CalendarDays";
+import ShareCard from "./ShareCard";
 
 const LOCALE = { it: "it-IT", en: "en-GB" };
 
@@ -61,6 +62,8 @@ export default function CalendarView({ lang, t }) {
           ))}
         </div>
       </div>
+
+      <ShareCard lang={lang} t={t} now={now} />
 
       {style === "timeline" && (
         <>

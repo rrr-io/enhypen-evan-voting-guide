@@ -12,6 +12,12 @@ import "./styles.css";
 const HASH = { guide: "#guida", calendar: "#calendario", scoring: "#punteggi" };
 const APP_IDS = new Set(APPS.map((a) => a.id));
 
+/* Filtri in cima alla guida: solo i programmi che hanno almeno una scheda app.
+   Show K-Pop sta nel calendario ma si vota da Mubeat, che resta su Music Core. */
+const SHOW_FILTERS = Object.entries(SHOWS).filter(([id]) =>
+  APPS.some((a) => a.show === id)
+);
+
 /* L'indirizzo può contenere #calendario, #guida oppure l'id di una app,
    per esempio #idolchamp: in quel caso apre la guida su quella scheda. */
 function readHash() {
@@ -122,7 +128,7 @@ export default function App() {
           >
             {t.allApps}
           </button>
-          {Object.entries(SHOWS).map(([id, s]) => (
+          {SHOW_FILTERS.map(([id, s]) => (
             <button
               key={id}
               className={`chip ${filter === id ? "chip-on" : ""}`}

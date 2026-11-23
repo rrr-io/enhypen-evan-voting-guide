@@ -145,4 +145,49 @@ export const SCORING = [
       },
     ],
   },
+  {
+    show: "kpop",
+    note: {
+      it: "Show K-Pop conta in due tempi: i primi cinque criteri (85%) scelgono i due finalisti, poi il voto durante la diretta (15%) decide chi dei due vince. Chi arriva primo tre volte entra nella Hall of Fame ed esce dalla classifica.",
+      en: "Show K-Pop counts in two stages: the first five criteria (85%) pick the two finalists, then the live vote (15%) decides which of the two wins. Whoever places first three times enters the Hall of Fame and leaves the chart.",
+    },
+    slices: [
+      {
+        key: "digitals",
+        pct: 40,
+        detail: {
+          it: "Streaming globale, contato da domenica a sabato due settimane prima della puntata",
+          en: "Global streaming, counted Sunday to Saturday two weeks before the episode",
+        },
+      },
+      { key: "physical", pct: 10, detail: { it: "Vendite dell'album", en: "Album sales" } },
+      {
+        key: "broadcast",
+        pct: 10,
+        detail: {
+          it: "Quante volte la canzone va in onda su Arirang TV",
+          en: "How often the song airs on Arirang TV",
+        },
+      },
+      { key: "sns", pct: 10, detail: { it: "Visualizzazioni del video musicale", en: "Music video views" } },
+      {
+        key: "prevote",
+        pct: 15,
+        apps: ["mubeat"],
+        detail: {
+          it: "Da giovedì alle 12:00 a sabato alle 12:00 KST, la settimana prima della puntata",
+          en: "From Thursday 12:00 to Saturday 12:00 KST, the week before the episode",
+        },
+      },
+      {
+        key: "livevote",
+        pct: 15,
+        apps: ["mubeat"],
+        detail: {
+          it: "Solo per i due finalisti, durante la diretta: max 50 voti a persona. Se la puntata non va in onda, non si fa",
+          en: "Only for the two finalists, during the broadcast: up to 50 votes per person. If the episode doesn't air, there's no live vote",
+        },
+      },
+    ],
+  },
 ];

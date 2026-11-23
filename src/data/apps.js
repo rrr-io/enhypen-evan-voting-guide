@@ -16,6 +16,7 @@ export const SHOWS = {
   inkigayo: { name: "Inkigayo", channel: "SBS", logo: icon("shows/inkigayo.png") },
   bank: { name: "Music Bank", channel: "KBS2", logo: icon("shows/musicbank.png") },
   mcountdown: { name: "M Countdown", channel: "Mnet", logo: icon("shows/mcountdown.png") },
+  kpop: { name: "Show K-Pop", channel: "Arirang TV", logo: icon("shows/showkpop.png") },
 };
 
 export const APPS = [

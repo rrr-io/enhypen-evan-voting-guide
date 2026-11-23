@@ -1,10 +1,11 @@
 /* Calendario delle votazioni — dal calendario ufficiale EN-CODE
-   "MUSIC SHOW VOTING SCHEDULES" (comeback the sin:bliss).
+   "I WANT YOU — MUSIC SHOW TRACKING & VOTING SCHEDULES"
+   (comeback the sin : parallel world).
 
    Gli orari si scrivono in KST (fuso +09:00) perché è così che li pubblicano i
    programmi coreani. La pagina mostra solo l'ora locale di chi guarda,
    convertita da questi valori.
-   Formato: "2026-08-21T20:00:00+09:00".
+   Formato: "2026-11-23T12:00:00+09:00".
 
    Un evento = un voto e la puntata a cui serve:
      episode    data e ora della diretta (KST)
@@ -19,6 +20,8 @@
      voteUrl    link diretto alla votazione di quella puntata, se esiste:
                 diventa un pulsante accanto alla finestra. Se il link è sempre
                 lo stesso conviene invece metterlo sulla scheda della app.
+                Con più app è un oggetto: { mubeat: "...", muniverse: "..." }.
+                I link vuoti non fanno comparire il pulsante.
      confirmed  true quando la finestra è confermata dai canali ufficiali.
                 Senza questo campo l'evento è marcato "da confermare", e in cima
                 al calendario compare l'avviso: quando tutti gli eventi hanno
@@ -29,189 +32,141 @@
    settimana dopo.
 
    Nota del calendario ufficiale: gli orari possono cambiare a discrezione dei
-   programmi. */
+   programmi.
+
+   Orari delle dirette che il poster non specifica, presi dalla fascia abituale
+   del programma: Music Bank 17:00, Music Core 15:15, Inkigayo 15:40. */
 
 /* Stato del calendario. `updated` è la data dell'ultimo controllo: viene mostrata
    in cima e dice al lettore quanto è fresca l'informazione. */
 export const STATUS = {
-  updated: "2026-09-05",
+  updated: "2026-11-23",
   source: { label: "EN-CODE", url: "" }, // url opzionale: se c'è, l'etichetta diventa un link
 };
 
 /* Titolo mostrato in cima al calendario. Lascia title vuoto per non mostrarlo. */
 export const ALBUM = {
   title: "the sin:parallel world ✿ ",
-  subtitle: { it: "", en: "" },
+  subtitle: { it: "I Want You", en: "I Want You" },
 };
 
 /* Note in cima a una settimana. La chiave è il lunedì di quella settimana.
-   Esempio: "2026-08-17": { it: "...", en: "..." } */
+   Esempio: "2026-11-23": { it: "...", en: "..." } */
 export const WEEK_NOTES = {};
 
 export const EVENTS = [
+  /* ── Settimana del comeback: 23–29 novembre ───────────────────────────── */
+
   {
-    id: "bank-21",
+    id: "bank-27",
     show: "bank",
     apps: [],
-    episode: "2026-08-21T17:15:00+09:00",
+    episode: "2026-11-27T17:00:00+09:00",
     prevote: null,
     liveVote: false,
     confirmed: true,
   },
   {
-    id: "core-22",
-    show: "core",
-    apps: [],
-    episode: "2026-08-22T15:15:00+09:00",
-    prevote: null,
-    confirmed: true,
-    liveVote: false,
-  },
-  {
-    id: "inki-23",
-    show: "inkigayo",
-    apps: [],
-    episode: "2026-08-23T15:15:00+09:00",
-    prevote: false,
-    liveVote: false,
-    confirmed: true,
-  },
-  {
-    id: "champ-26",
-    show: "champion",
-    apps: ["idolchamp"],
-    episode: "2026-08-26T17:00:00+09:00",
-    prevote: { start: "2026-08-21T20:00:00+09:00", end: "2026-08-24T14:59:00+09:00" },
-    liveVote: false,
-    confirmed: true,
-    voteUrl: "https://promo-web.idolchamp.com/app_proxy.html?deeplink=https%3A%2F%2Fapp.idolchamp.com%2Fopen%2Fvote%2F01M098MP4J7EEMYG22YGMXY2ED", // esempio: "https://..." — vuoto, il pulsante non compare
-  },
-  {
-    id: "mcd-27",
-    show: "mcountdown",
-    apps: ["mnetplus"],
-    episode: "2026-08-27T18:00:00+09:00",
-    prevote: { start: "2026-08-22T00:00:00+09:00", end: "2026-08-25T23:59:00+09:00" },
-    liveVote: true,
-    confirmed: true,
-    voteUrl: "https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a841062ad9bac26374d24ff%3Furl_fallback_type%3Dupdate",
-  },
-  {
-    id: "bank-28",
-    show: "bank",
-    apps: ["coogoong"],
-    episode: "2026-08-28T17:15:00+09:00",
-    prevote: { start: "2026-08-23T15:00:00+09:00", end: "2026-08-26T11:00:00+09:00" },
-    voteUrl: "https://open.coogoong.com/?target=event%2Fdetail%3Fkey_event%3D803",
-    confirmed: true,
-    liveVote: false,
-  },
-  {
-    id: "core-29",
+    id: "core-28",
     show: "core",
     apps: ["mubeat", "muniverse"],
-    episode: "2026-08-29T15:15:00+09:00",
-    prevote: { start: "2026-08-25T18:00:00+09:00", end: "2026-08-27T11:00:00+09:00" },
-    liveVote: true,
-    voteUrl: { mubeat: "https://mubeat.applink.info/xZAvfWULyE", muniverse: "https://www.muniverse.io/votes" },
+    episode: "2026-11-28T15:15:00+09:00",
+    prevote: { start: "2026-11-24T18:00:00+09:00", end: "2026-11-26T11:00:00+09:00" },
+    liveVote: false,
     confirmed: true,
+    voteUrl: { mubeat: "", muniverse: "" },
   },
   {
-    id: "inki-30",
+    id: "inki-29",
     show: "inkigayo",
     apps: ["linc"],
-    episode: "2026-08-30T15:20:00+09:00",
-    prevote: { start: "2026-08-24T12:00:00+09:00", end: "2026-08-28T23:59:00+09:00" },
-    voteUrl: "https://app.linc.fan/31TL/QQZGPb9Z",
-    liveVote: true,
+    episode: "2026-11-29T15:40:00+09:00",
+    prevote: { start: "2026-11-23T12:00:00+09:00", end: "2026-11-27T23:59:00+09:00" },
+    liveVote: false,
     confirmed: true,
+    voteUrl: "",
     note: {
       it: "30 Fan Point o 8 💎 per voto. Max 10 voti per account.",
-      en: "30 Fan Points o 8 💎 per vote. Max 10 votes per account",
+      en: "30 Fan Points or 8 💎 per vote. Max 10 votes per account.",
     },
   },
-  //to add prevote if confirmed
+
+  /* ── Settimana del 30 novembre – 6 dicembre ───────────────────────────── */
+
   {
-    id: "mcd-03",
-    show: "mcountdown",
-    apps: ["mnetplus"],
-    episode: "2026-09-03T18:00:00+09:00",
-    prevote: { start: "2026-08-29T00:00:00+09:00", end: "2026-09-01T23:59:00+09:00" },
-    confirmed: true,
+    id: "kpop-30",
+    show: "kpop",
+    apps: ["mubeat"],
+    episode: "2026-11-30T18:00:00+09:00",
+    prevote: { start: "2026-11-26T12:00:00+09:00", end: "2026-11-28T12:00:00+09:00" },
     liveVote: true,
-    voteUrl:"https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a8e298fad9bac26374d260f%3Furl_fallback_type%3Dupdate",
-    stage: "none",
+    confirmed: true,
+    voteUrl: "",
+    note: {
+      it: "Il pre-vote serve a entrare nei primi due in classifica; il voto durante la diretta decide chi dei due vince, con un massimo di 50 voti a persona.",
+      en: "The pre-vote decides who makes the top two; the live vote during the broadcast picks the winner between them, with up to 50 votes per person.",
+    },
+  },
+  {
+    id: "champ-02",
+    show: "champion",
+    apps: ["idolchamp"],
+    episode: "2026-12-02T17:00:00+09:00",
+    prevote: { start: "2026-11-27T20:00:00+09:00", end: "2026-11-30T15:00:00+09:00" },
+    liveVote: false,
+    confirmed: true,
+    voteUrl: "",
   },
   {
     id: "bank-04",
     show: "bank",
     apps: ["coogoong"],
-    episode: "2026-09-04T17:15:00+09:00",
-    prevote: { start: "2026-08-30T15:00:00+09:00", end: "2026-09-02T11:00:00+09:00" },
+    episode: "2026-12-04T17:00:00+09:00",
+    prevote: { start: "2026-11-29T15:00:00+09:00", end: "2026-12-02T11:00:00+09:00" },
     liveVote: false,
     confirmed: true,
-    voteUrl:"https://open.coogoong.com/?target=event%2Fdetail%3Fkey_event%3D813",
-    stage: "none", // esempio: il voto c'è, il palco non è ancora confermato
+    voteUrl: "",
   },
   {
-    id: "mcd-10",
-    show: "mcountdown",
-    apps: ["mnetplus"],
-    episode: "2026-09-10T18:00:00+09:00",
-    prevote: { start: "2026-09-05T00:00:00+09:00", end: "2026-09-08T23:59:00+09:00" },
-    confirmed: true,
+    id: "core-05",
+    show: "core",
+    apps: ["mubeat", "muniverse"],
+    episode: "2026-12-05T15:15:00+09:00",
+    prevote: null, // il poster non dà ancora la finestra: aggiungila quando esce
     liveVote: true,
-    voteUrl:"https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a9615e3ee62464555ec2935%3Furl_fallback_type%3Dupdate",
-    stage: "none",
+    confirmed: true,
+    voteUrl: { mubeat: "", muniverse: "" },
+  },
+  {
+    id: "inki-06",
+    show: "inkigayo",
+    apps: ["higher"],
+    episode: "2026-12-06T15:40:00+09:00",
+    prevote: null, // il poster non dà ancora la finestra: aggiungila quando esce
+    liveVote: true,
+    confirmed: true,
+    voteUrl: "",
   },
 
-  /* Votazione fuori classifica, per esempio lo Stage M Pick di Muniverse:
-     stessa struttura, con l'etichetta cambiata e la puntata in cui andrebbe in
-     onda il palco. Togli le barre di commento e metti le date vere.*/
+  /* Votazione fuori classifica, per esempio lo Stage M Pick di Muniverse o
+     l'Hot Stage di Higher: stessa struttura, con l'etichetta cambiata e la
+     puntata in cui andrebbe in onda il palco. Togli le barre di commento e
+     metti le date vere.
 
   {
     id: "mpick-05",
     show: "core",
     apps: ["muniverse"],
     episode: "",
-    prevote: { start: "2026-08-22T17:00:00+09:00", end: "2026-08-27T12:00:00+09:00" },
+    prevote: { start: "2026-11-28T17:00:00+09:00", end: "2026-12-03T12:00:00+09:00" },
     liveVote: false,
     voteLabel: { it: "Stage M Pick", en: "Stage M Pick" },
     voteUrl: "https://www.muniverse.io/votes",
     confirmed: true,
     note: {
-      it: "Non fa classifica: decide chi porta il palco speciale. ",
+      it: "Non fa classifica: decide chi porta il palco speciale.",
       en: "It doesn't count towards the chart: it picks who performs the special stage.",
     },
   },
-  {
-    id: "hotstage-30",
-    show: "inkigayo",
-    apps: ["higher"],
-    episode: "",
-    prevote: { start: "2026-08-23T15:20:00+09:00", end: "2026-08-27T12:00:00+09:00" },
-    liveVote: false,
-    voteLabel: { it: "Hot Stage", en: "Hot Stage" },
-    confirmed: true,
-    voteUrl: "https://higher.fan/app/hotstage/6",
-    note: {
-      it: "Non fa classifica: decide chi porta il palco extra. La votazione apre durante la diretta del 30 e chiude giovedì 27 alle 12:00 KST.",
-      en: "It doesn't count towards the chart: it picks who gets the extra stage. Voting opens during the 23rd broadcast and closes on Thursday the 27th at 12:00 KST.",
-    },
-  },
-  {
-    id: "mcountdown-pick-31",
-    show: "mcountdown",
-    apps: ["mnetplus"],
-    episode: "",
-    prevote: { start: "2026-08-28T12:00:00+09:00", end: "2026-08-31T11:59:00+09:00" },
-    liveVote: false,
-    voteLabel: { it: "Weekly MCD Pick Stage", en: "Weekly MCD Pick Stage" },
-    confirmed: true,
-    voteUrl: "https://mnetplus.onelink.me/TRa8/xohkwx0b?custom_link_value=vote%2Fv2%2F6a8e295eee62464555ec2880%3Furl_fallback_type%3Dupdate",
-    note: {
-      it: "5 voti per account.  Il vincitore guadagna un video speciale e la candidatura a Montly MCD Pick Stage.",
-      en: "5 votes per account. The winner gets a special behind the scene video and the nomination for Monthly MCD Pick Stage.",
-    },
-  },
+  */
 ];
