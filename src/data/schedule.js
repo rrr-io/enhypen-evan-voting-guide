@@ -71,7 +71,7 @@ export const EVENTS = [
     show: "core",
     apps: ["mubeat", "muniverse"],
     episode: "2026-11-28T15:15:00+09:00",
-    prevote: { start: "2026-11-24T18:00:00+09:00", end: "2026-11-26T11:00:00+09:00" },
+    prevote: null,
     liveVote: false,
     confirmed: true,
     voteUrl: { mubeat: "", muniverse: "" },
